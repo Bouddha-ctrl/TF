@@ -15,6 +15,6 @@ EXPOSE 8080
 ENTRYPOINT ["java","-jar","/usr/local/lib/croissantshow.war"]
 
 FROM tomcat
-COPY target/croissantshow-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps
+COPY --from=build /home/app/target/croissantshow-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps
 EXPOSE 8173
 CMD ["catalina.sh", "run"]
