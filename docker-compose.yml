@@ -5,4 +5,4 @@ services:
     build: ./tomcat-img
     image: tomcat-img
     ports:
-      - 8173:8173
+      - 8173:80
