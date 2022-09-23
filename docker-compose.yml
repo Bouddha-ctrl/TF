@@ -2,7 +2,7 @@ version: '3'
 
 services:
   app:
-    build: .
+    build: ./tomcat-img
     image: tomcat-img
     ports:
       - 8173:8173
