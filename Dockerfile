@@ -6,6 +6,7 @@ ADD pom.xml $HOME
 RUN ["mvn", "dependency:resolve"]
 RUN ["/usr/local/bin/mvn-entrypoint.sh", "mvn", "verify", "clean", "--fail-never"]
 RUN ["mvn", "package"]
+RUN ["mvn", "--version"]
 ADD . $HOME
 RUN ["mvn","clean","install","-T","2C","-DskipTests=true"]
 
