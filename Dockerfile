@@ -3,11 +3,11 @@ ENV HOME=/app
 WORKDIR $HOME
 
 ADD pom.xml $HOME
-RUN ["/usr/local/bin/mvn-entrypoint.sh", "mvn", "verify", "clean", "--fail-never"]
-RUN ["mvn", "package"]
+RUN ["mvn", "verify"]
 RUN ["mvn", "--version"]
 ADD . $HOME
-RUN ["mvn","clean","install","-T","2C","-DskipTests=true"]
+RUN ["mvn", "package"]
+
 
 
 
