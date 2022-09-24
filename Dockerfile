@@ -8,8 +8,7 @@ RUN ["mvn", "package"]
 RUN ["mvn", "--version"]
 ADD . $HOME
 RUN ["mvn","clean","install","-T","2C","-DskipTests=true"]
-ADD target/croissantshow-0.0.1-SNAPSHOT.war croissantshow.jar
-ENTRYPOINT ["java", "-jar", "croissantshow.jar"]
+
 
 
 
