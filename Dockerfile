@@ -8,8 +8,9 @@ RUN ["mvn", "dependency:resolve"]
 RUN ["/usr/local/bin/mvn-entrypoint.sh", "mvn", "verify", "clean", "--fail-never"]
 ADD . $HOME
 RUN ["mvn","clean","install","-T","2C","-DskipTests=true"]
-ADD src /src
 RUN ["mvn", "package"]
+ADD src /src
+
 
 
 FROM openjdk:11
