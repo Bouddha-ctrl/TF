@@ -7,9 +7,9 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 RUN mvn package 
 
-FROM tomcat:8.5-jdk11-openjdk-oracle
+FROM tomcat-jdk11-openjdk-oracle
 ARG TOMCAT_FILE_PATH=/docker 
-	
+
 #Data & Config - Persistent Mount Point
 ENV APP_DATA_FOLDER=/var/lib/croissantshow-0.0.1-SNAPSHOT
 ENV SAMPLE_APP_CONFIG=${APP_DATA_FOLDER}/config/
