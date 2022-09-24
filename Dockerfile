@@ -1,25 +1,21 @@
-########build stage########
-FROM maven:3.6.0-jdk-11-slim AS maven_build
-WORKDIR /app
-
+#----
+# Build stage
+#----
+FROM maven:3.6-jdk-11 as buildstage
+# Copy only pom.xml of your projects and download dependencies
 COPY pom.xml .
-# To resolve dependencies in a safe way (no re-download when the source code changes)
-RUN mvn clean package -Dmaven.main.skip -Dmaven.test.skip && rm -r target
+RUN mvn -B -f pom.xml dependency:go-offline
+# Copy all other project files and build project
+COPY . .
+RUN mvn -B install
 
-# To package the application
-COPY src ./src
-RUN mvn clean package -Dmaven.test.skip
-
-########run stage########
+#----
+# Final stage
+#----
 FROM java:11
-WORKDIR /app
-COPY --from=maven_build /app/target/*.war ./
-
-#run the app
-#ENV JAVA_OPTS ""
-#CMD [ "bash", "-c", "java ${JAVA_OPTS} -jar *.jar -v"]
+COPY --from=buildstage ./target/*.war ./
 
 FROM tomcat
-COPY --from=maven_build /home/app/target/croissantshow-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps
+COPY --from=buildstage /home/app/target/croissantshow-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
