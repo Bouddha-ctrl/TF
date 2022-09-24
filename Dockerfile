@@ -1,5 +1,5 @@
 ########build stage########
-FROM maven:3.5-jdk-11 as maven_build
+FROM maven:3.6.0-jdk-11-slim AS maven_build
 WORKDIR /app
 
 COPY pom.xml .
