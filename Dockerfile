@@ -1,14 +1,14 @@
 FROM maven:3.6.0-jdk-11-slim AS build
 ENV HOME=/app
 WORKDIR $HOME
-RUN apt-get update
-RUN apt-get install -y maven
+
 ADD pom.xml $HOME
 RUN ["mvn", "dependency:resolve"]
 RUN ["/usr/local/bin/mvn-entrypoint.sh", "mvn", "verify", "clean", "--fail-never"]
+RUN ["mvn", "package"]
 ADD . $HOME
 RUN ["mvn","clean","install","-T","2C","-DskipTests=true"]
-RUN ["mvn", "package"]
+
 ADD src /src
 
 
