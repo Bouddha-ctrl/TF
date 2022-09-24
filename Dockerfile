@@ -1,28 +1,19 @@
-FROM maven:3.6.3 as maven
-LABEL COMPANY="ShuttleOps"
-LABEL MAINTAINER="support@shuttleops.com"
-LABEL APPLICATION="Sample Application"
+#
+# Build stage
+#
+FROM maven:3.6.0-jdk-11-slim AS build
+COPY src /home/app/src
+COPY pom.xml /home/app
+RUN mvn -f /home/app/pom.xml clean package
 
-WORKDIR /usr/src/app
-COPY . /usr/src/app
-RUN mvn package 
-
-FROM tomcat:9.0.48-jdk11-openjdk-slim
-ARG TOMCAT_FILE_PATH=/docker 
-
-#Data & Config - Persistent Mount Point
-ENV APP_DATA_FOLDER=/var/lib/croissantshow-0.0.1-SNAPSHOT
-ENV SAMPLE_APP_CONFIG=${APP_DATA_FOLDER}/config/
-	
-ENV CATALINA_OPTS="-Xms1024m -Xmx4096m -XX:MetaspaceSize=512m -	XX:MaxMetaspaceSize=512m -Xss512k"
-
-#Move over the War file from previous build step
-WORKDIR /usr/local/tomcat/webapps/
-COPY --from=maven /usr/src/app/target/croissantshow-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/croissantshow.war
-
-COPY ${TOMCAT_FILE_PATH}/* ${CATALINA_HOME}/conf/
-
-WORKDIR $APP_DATA_FOLDER
-
+#
+# Package stage
+#
+FROM openjdk:11-jre-slim
+COPY --from=build /home/app/target/croissantshow-0.0.1-SNAPSHOT.war /usr/local/lib/croissantshow.war
 EXPOSE 8080
-ENTRYPOINT ["catalina.sh", "run"]
+
+FROM tomcat
+COPY --from=build /home/app/target/croissantshow-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
