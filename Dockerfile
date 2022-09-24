@@ -3,7 +3,7 @@ ENV HOME=/app
 WORKDIR $HOME
 
 ADD pom.xml $HOME
-RUN ["mvn", "verify"]
+
 RUN ["mvn", "--version"]
 ADD . $HOME
 RUN ["mvn", "package"]
