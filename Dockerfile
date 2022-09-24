@@ -13,13 +13,13 @@ RUN mvn clean package -Dmaven.test.skip
 ########run stage########
 FROM java:11
 WORKDIR /app
-COPY --from=maven_build /app/target/*.war
+COPY --from=maven_build /app/target/*.war ./
 
 #run the app
 #ENV JAVA_OPTS ""
 #CMD [ "bash", "-c", "java ${JAVA_OPTS} -jar *.jar -v"]
 
 FROM tomcat
-COPY --from=build /home/app/target/croissantshow-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps
+COPY --from=maven_build /home/app/target/croissantshow-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
