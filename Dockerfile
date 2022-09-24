@@ -9,7 +9,6 @@ RUN ["mvn", "verify"]
 RUN ["/usr/local/bin/mvn-entrypoint.sh", "mvn", "verify", "clean", "--fail-never"]
 ADD . $HOME
 RUN ["mvn","clean","install","-T","2C","-DskipTests=true"]
-ADD src $HOME/src/
 RUN ["mvn", "package"]
 
 
