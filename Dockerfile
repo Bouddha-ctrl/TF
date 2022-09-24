@@ -5,10 +5,10 @@ RUN apt-get update
 RUN apt-get install -y maven
 ADD pom.xml $HOME
 RUN ["mvn", "dependency:resolve"]
-RUN ["mvn", "verify"]
 RUN ["/usr/local/bin/mvn-entrypoint.sh", "mvn", "verify", "clean", "--fail-never"]
 ADD . $HOME
 RUN ["mvn","clean","install","-T","2C","-DskipTests=true"]
+ADD src /src
 RUN ["mvn", "package"]
 
 
