@@ -1,6 +1,5 @@
 FROM maven:3.6.0-jdk-11-slim AS build
 ENV HOME=/app
-VOLUME /tmp
 WORKDIR $HOME
 
 ADD pom.xml $HOME/pom.xml
