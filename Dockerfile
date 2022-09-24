@@ -1,19 +1,11 @@
-#
-# Build stage
-#
 FROM maven:3.6.0-jdk-11-slim AS build
-COPY src /home/app/src
-COPY pom.xml /home/app
-RUN mvn -f /home/app/pom.xml clean package
+ENV HOME=/app
+WORKDIR $HOME
+ADD pom.xml $HOME
+RUN ["/usr/local/bin/mvn-entrypoint.sh", "mvn", "verify", "clean", "--fail-never"]
+ADD . $HOME
+RUN ["mvn","clean","install","-T","2C","-DskipTests=true"]
 
-#
-# Package stage
-#
-FROM openjdk:11-jre-slim
-COPY --from=build /home/app/target/croissantshow-0.0.1-SNAPSHOT.war /usr/local/lib/croissantshow.war
-EXPOSE 8080
-
-FROM tomcat
-COPY --from=build /home/app/target/croissantshow-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps
-EXPOSE 8080
-CMD ["catalina.sh", "run"]
+FROM openjdk:11
+ADD target/croissantshow-0.0.1-SNAPSHOT.war croissantshow.jar
+ENTRYPOINT ["java", "-jar", "croissantshow.jar"]
