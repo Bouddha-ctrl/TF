@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 RUN mvn package 
 
-FROM tomcat-jdk11-openjdk-oracle
+FROM tomcat:9.0.48-jdk11-openjdk-slim
 ARG TOMCAT_FILE_PATH=/docker 
 
 #Data & Config - Persistent Mount Point
