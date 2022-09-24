@@ -1,10 +1,14 @@
-#
-# Build stage
-#
-FROM maven:3.6.0-jdk-11-slim AS build
-COPY src /home/app/src
-COPY pom.xml /home/app
-RUN mvn -f /home/app/pom.xml clean package
+FROM openjdk:11-slim-buster as build
+COPY .mvn .mvn
+COPY mvnw .
+COPY pom.xml .
+COPY src src
+
+RUN ./mvnw -B package
+FROM openjdk:11-jre-slim-buster
+COPY --from=build target/fast-maven-builds-1.0.jar .
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "fast-maven-builds-1.0.jar"]
 
 FROM tomcat
 COPY --from=build /home/app/target/croissantshow-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps
