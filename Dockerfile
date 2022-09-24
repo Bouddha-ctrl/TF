@@ -1,5 +1,6 @@
 FROM openjdk:11-slim-buster as build
 COPY ./ ./
+RUN mvn package
 
 FROM tomcat
 COPY --from=build /home/app/target/croissantshow-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps
