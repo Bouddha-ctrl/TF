@@ -12,7 +12,7 @@ RUN mvn -B install
 #----
 # Final stage
 #----
-FROM java:11
+FROM java
 COPY --from=buildstage ./target/*.war ./
 
 FROM tomcat
