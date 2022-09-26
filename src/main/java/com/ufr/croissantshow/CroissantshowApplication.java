@@ -13,16 +13,11 @@ public class CroissantshowApplication {
 
 	@GetMapping("/greeting")
 	public String greeting(){
-		System.out.println("he");
 		return "Hello";
 	}
 
-
 	public static void main(String[] args) {
-
-
 		SpringApplication.run(CroissantshowApplication.class, args);
-		System.out.println("Hello word!");
 	}
 
 }

@@ -1,2 +1,4 @@
-package com.ufr.croissantshow.service;public interface IUserService {
+package com.ufr.croissantshow.service;
+
+public interface IUserService {
 }
