@@ -30,8 +30,13 @@ public class Utilisateur {
     @NotBlank(message = "This field is required")
     private String motPasse; // Entre 8 et 24 caractères, au moins une minuscule, une majuscule, un chiffre
 
+    @Column
     @Email(message = "Invalide email")
     private String email; // Adresse email valide (format X@Y.Z)
+
+    @Column
     private boolean enAttenteDeValidation;
+
+    @Column
     private boolean estAdmin;
 }
