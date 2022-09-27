@@ -39,7 +39,7 @@ public class Utilisateur {
     private String prenom;
 
     @Column
-    @Email(message = "Invalide email")
+    @Email(message = "Invalid email")
     private String email; // Adresse email valide (format X@Y.Z)
 
     @Column
