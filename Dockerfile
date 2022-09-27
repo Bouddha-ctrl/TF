@@ -1,21 +1,13 @@
-#----
-# Build stage
-#----
-FROM maven:3.6-jdk-11 as buildstage
-# Copy only pom.xml of your projects and download dependencies
-COPY pom.xml .
-RUN mvn -B -f pom.xml dependency:go-offline
-# Copy all other project files and build project
-COPY . .
-RUN mvn -B install
+FROM maven:3.6.0-jdk-11-slim AS build
+ENV HOME=/app
+WORKDIR $HOME
+VOLUME /tmp
 
-#----
-# Final stage
-#----
-FROM java:8
-COPY --from=buildstage ./target/*.war ./
+COPY pom.xml $HOME/pom.xml
 
-FROM tomcat
-COPY --from=buildstage /home/app/target/croissantshow-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps
-EXPOSE 8080
-CMD ["catalina.sh", "run"]
+
+COPY src $HOME/src
+RUN mvn package
+
+
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=container","-jar","target/croissantshow-0.0.1-SNAPSHOT.jar"]
