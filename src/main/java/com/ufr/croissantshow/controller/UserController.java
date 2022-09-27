@@ -1,2 +1,32 @@
-package com.ufr.croissantshow.controller;public class userController {
+package com.ufr.croissantshow.controller;
+
+import com.ufr.croissantshow.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class UserController {
+
+    @Autowired
+    private IUserService userService;
+
+    @RequestMapping("/")
+    public String accueil(){
+        return "accueil";
+    }
+
+    @RequestMapping("/user/home")
+    public String userHomePage(){
+
+        return "user/user_homepage"; // ressource/templates/...
+    }
+
+    @RequestMapping("/admin/home")
+    public String adminHomePage(){
+
+        return "admin/admin_homepage";
+    }
+
+
 }

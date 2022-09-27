@@ -15,19 +15,15 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-//@PropertySource({ "classpath:application.properties" })
 @EnableJpaRepositories(basePackages = "com.ufr.croissantshow.dao")
 public class JpaConfiguration {
 
     @Autowired
     private Environment env;
 
-    @Autowired
-    private DataSource dataSource;
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        System.out.println(dataSource);
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
         em.setPackagesToScan(new String[] { "com.ufr.croissantshow.modele" });
