@@ -1,7 +1,19 @@
 version: '3'
 
+networks:
+  default:
+    driver: bridge
+
 services:
 
+  app:
+    build: .
+    image: croissantshow
+    ports:
+      - 8173:8080
+    depends_on:
+      - db
+      
   db:
     image: mysql:5.7
     environment:
