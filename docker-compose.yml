@@ -1,25 +1,13 @@
 version: '3'
 
-networks:
-  default:
-    driver: bridge
-
 services:
 
-  app:
-    build: .
-    image: croissantshow
-    ports:
-      - 8173:8080
-      
   db:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: 
-      MYSQL_DATABASE: root
+      MYSQL_ROOT_PASSWORD: m2test2
+      MYSQL_DATABASE: m2test2
     volumes:
       - my-datavolume:/var/lib/mysql
-      
 volumes:
   my-datavolume:
-  
