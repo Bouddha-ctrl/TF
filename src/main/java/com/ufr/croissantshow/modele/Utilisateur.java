@@ -35,8 +35,6 @@ public class Utilisateur {
     private String email; // Adresse email valide (format X@Y.Z)
 
     @Column
-    private boolean enAttenteDeValidation;
+    private boolean actif;
 
-    @Column
-    private boolean estAdmin;
 }
