@@ -17,6 +17,7 @@ services:
   db:
     image: mysql:5.7
     environment:
+      MYSQL_USER: m2test2
       MYSQL_ROOT_PASSWORD: m2test2
       MYSQL_DATABASE: croissantshow
     volumes:
