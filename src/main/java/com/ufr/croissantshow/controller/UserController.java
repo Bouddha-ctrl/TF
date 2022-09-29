@@ -1,9 +1,13 @@
 package com.ufr.croissantshow.controller;
 
+
+import com.ufr.croissantshow.modele.Utilisateur;
 import com.ufr.croissantshow.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -28,5 +32,11 @@ public class UserController {
         return "admin/admin_homepage";
     }
 
+    @RequestMapping("/admin/user/list")
+    public String userList(Model model){
+        List<Utilisateur> users = userService.getAllUsers();
+        model.addAttribute("users",users);
 
+        return "admin/userList";
+    }
 }
