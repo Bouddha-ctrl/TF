@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    User home page
+    User home page</br>
+    Hello :<div sec:authentication="name"></div></br>
+    Role  :<div sec:authentication="principal.authorities"></div>
 </body>
 </html>

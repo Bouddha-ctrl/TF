@@ -14,7 +14,7 @@ public class UserServiceImp implements IUserService {
     @Autowired
     private IUserDao userDao;
 
-    // Exemple
+    @Override
     public Utilisateur getUserById(int userId){
         return userDao.findById(userId).get();
     }
@@ -23,4 +23,5 @@ public class UserServiceImp implements IUserService {
     public List<Utilisateur> getAllUsers() {
         return userDao.findAll();
     }
+
 }
