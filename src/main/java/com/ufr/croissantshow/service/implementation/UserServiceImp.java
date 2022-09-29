@@ -6,6 +6,8 @@ import com.ufr.croissantshow.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImp implements IUserService {
 
@@ -15,5 +17,10 @@ public class UserServiceImp implements IUserService {
     // Exemple
     public Utilisateur getUserById(int userId){
         return userDao.findById(userId).get();
+    }
+
+    @Override
+    public List<Utilisateur> getAllUsers() {
+        return userDao.findAll();
     }
 }
