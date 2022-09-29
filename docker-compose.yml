@@ -11,19 +11,9 @@ services:
     image: croissantshow
     ports:
       - 8173:8080
-    depends_on:
-      - db
+
       
-  db:
-    image: mysql:5.7
-    environment:
-      MYSQL_USER: m2test2
-      MYSQL_ROOT_PASSWORD: m2test2
-      MYSQL_DATABASE: croissantshow
-    volumes:
-      - my-datavolume:/var/lib/mysql
-    ports:
-      - "3306:3306"      
+
 
 volumes:
   my-datavolume:
