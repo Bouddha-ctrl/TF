@@ -1,6 +1,7 @@
 package com.ufr.croissantshow.modele;
 
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,6 +15,10 @@ import java.util.List;
 @Entity
 public class Mercredi {
     @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    private int id;
+
     @Column
     private Date date;
 
@@ -21,14 +26,16 @@ public class Mercredi {
     private boolean mercrediAnnule; // Si l'admin l'a annulé (jour férié ect) ou si il n'y a pas de responsable
 
     @ManyToMany
-    @JoinColumn(name="present_utilisateur_id")
-    private List<Utilisateur> presents;
+    @JoinTable(
+            name = "utilisateur_present",
+            joinColumns = @JoinColumn(name = "mercredi_id"),
+            inverseJoinColumns = @JoinColumn(name = "utilisateur_id"))
+    private List<User> presents;
 
-    @ManyToMany
-    @JoinColumn(name="absent_id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mercredi")
     private List<Absent> absents;
 
     @ManyToOne
-    @JoinColumn(name="responsable_utilisateur_id")
-    private Utilisateur responsable;
+    @JoinColumn(name="responsable_id")
+    private User responsable;
 }

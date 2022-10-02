@@ -3,7 +3,7 @@ package com.ufr.croissantshow;
 import com.ufr.croissantshow.dao.IRoleDao;
 import com.ufr.croissantshow.dao.IUserDao;
 import com.ufr.croissantshow.modele.Role;
-import com.ufr.croissantshow.modele.Utilisateur;
+import com.ufr.croissantshow.modele.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -39,26 +39,26 @@ public class CroissantshowApplication implements CommandLineRunner {
 		Role role2 = Role.builder().roleName("ROLE_USER").build();
 		rDao.save(role2);
 
-		Utilisateur user1 = Utilisateur.builder()
+		User user1 = User.builder()
 				.role(role)
-				.actif(false)
+				.enabled(true)
 				.email("email@email.com")
-				.identifiant("adminadmin")
-				.motPasse("adminadmin")
-				.nom("nom")
-				.prenom("prenom")
+				.username("adminadmin")
+				.password("adminadmin")
+				.lastname("nom")
+				.firstname("prenom")
 				.build();
 
 		uDao.save(user1);
 
-		Utilisateur user2 = Utilisateur.builder()
+		User user2 = User.builder()
 				.role(role2)
-				.actif(true)
+				.enabled(true)
 				.email("email@email.com")
-				.identifiant("useruser")
-				.motPasse("useruser")
-				.nom("nom")
-				.prenom("prenom")
+				.username("useruser")
+				.password("useruser")
+				.lastname("nom")
+				.firstname("prenom")
 				.build();
 
 		uDao.save(user2);

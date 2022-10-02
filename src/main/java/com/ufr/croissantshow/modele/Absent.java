@@ -1,6 +1,7 @@
 package com.ufr.croissantshow.modele;
 
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -12,13 +13,18 @@ import javax.persistence.*;
 @Entity
 public class Absent {
     @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     private long id;
 
     @ManyToOne
     @JoinColumn(name="utilisateur_id")
-    private Utilisateur utilisateur;
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name="raison_absence_id")
+    @JoinColumn(name="mercredi_id")
+    private Mercredi mercredi;
+
+    @Enumerated(EnumType.STRING)
     private RaisonAbsence raison;
 }

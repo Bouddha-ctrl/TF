@@ -1,7 +1,7 @@
 package com.ufr.croissantshow.security;
 
 import com.ufr.croissantshow.modele.Role;
-import com.ufr.croissantshow.modele.Utilisateur;
+import com.ufr.croissantshow.modele.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,9 +11,9 @@ import java.util.Collection;
 import java.util.List;
 
 public class MyUserDetails  implements UserDetails {
-    private Utilisateur user;
+    private User user;
 
-    public MyUserDetails (Utilisateur user) {
+    public MyUserDetails (User user) {
         this.user = user;
     }
 
@@ -27,12 +27,12 @@ public class MyUserDetails  implements UserDetails {
 
     @Override
     public String getPassword() {
-        return user.getMotPasse();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getIdentifiant();
+        return user.getUsername();
     }
 
     @Override
@@ -52,6 +52,6 @@ public class MyUserDetails  implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return user.isActif();
+        return user.isEnabled();
     }
 }

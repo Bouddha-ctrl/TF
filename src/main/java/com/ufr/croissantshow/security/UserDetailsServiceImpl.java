@@ -1,7 +1,7 @@
 package com.ufr.croissantshow.security;
 
 import com.ufr.croissantshow.dao.IUserDao;
-import com.ufr.croissantshow.modele.Utilisateur;
+import com.ufr.croissantshow.modele.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,7 +14,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Utilisateur user = userDao.getUtilisateurByIdentifiant(username);
+        User user = userDao.getUserByUsername(username);
 
         if (user == null) throw new UsernameNotFoundException("Could not find user");
 
