@@ -41,7 +41,7 @@ public class CroissantshowApplication implements CommandLineRunner {
 
 		Utilisateur user1 = Utilisateur.builder()
 				.role(role)
-				.actif(true)
+				.actif(false)
 				.email("email@email.com")
 				.identifiant("adminadmin")
 				.motPasse("adminadmin")

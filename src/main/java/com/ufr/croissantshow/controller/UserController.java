@@ -41,4 +41,16 @@ public class UserController {
 
         return "admin/userList";
     }
+
+    @RequestMapping("/login")
+    public String login(){
+
+        return "login";
+    }
+
+    @RequestMapping("/createAccount")
+    public String signup(){
+
+        return "create_account";
+    }
 }
