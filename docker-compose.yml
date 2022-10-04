@@ -4,6 +4,8 @@ services:
 
   app:
     build:
+      image: croissantshow
+      container_name: croissantshow
       context: .                          #docker file path (. means root directory)
       dockerfile: Dockerfile
     ports:
