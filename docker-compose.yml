@@ -1,19 +1,34 @@
-version: '3'
-
-networks:
-  default:
-    driver: bridge
+version: '3.3'
 
 services:
 
   app:
-    build: .
     image: croissantshow
+    container_name: croissantshow
+    build:
+      context: .                          #docker file path (. means root directory)
+      dockerfile: Dockerfile
     ports:
-      - 8173:8080
+      - "8173:8173"
 
-      
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://172.20.128.68/m2test2
+  db:
+    image: mysql:latest
+    container_name: mysql-db
+    environment:
+      MYSQL_USERNAME: "m2test2"
+      MYSQL_ROOT_PASSWORD: "pV0U25rb"
+      MYSQL_DATABASE: "m2test2"
+    volumes:
+      - my-datavolume:/var/lib/mysql
 
+    #service 2: definition of phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: my-php-myadmin
+    depends_on:
+      - db
 
 volumes:
   my-datavolume:
