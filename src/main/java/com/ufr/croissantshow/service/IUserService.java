@@ -16,6 +16,6 @@ public interface IUserService {
     public User getUserById(int id) throws UserNotFoundException;
     public List<User> getAllUsers();
 
-
+    public void enableUser(User user);
 
 }

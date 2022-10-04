@@ -1,6 +1,14 @@
 .croissant_svg {
     max-width: 400px;
+    max-height: 200px !important;
 }
 body{
     background-color: red;
+}
+
+.sgv {
+    max-height: 300px ;
+}
+h1 {
+    text-align: center;
 }

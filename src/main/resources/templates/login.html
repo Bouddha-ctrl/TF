@@ -1,28 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<head >
     <link th:href="@{/css/login.css}" rel="stylesheet" />
-    <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css"
-            rel="stylesheet"
-    />
-    <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-            rel="stylesheet"
-    />
-
+    <span th:replace="layouts/head :: head"></span>
     <title>Login</title>
 </head>
 <body>
+
 <section class="vh-100">
-    <div class="container py-5 h-100">
-        <div class="row d-flex align-items-center justify-content-center h-100">
-            <div class="col-md-8 col-lg-7 col-xl-6">
+    <span th:replace="layouts/navbar :: accueil_navbar"></span>
+    <div class="container py-5">
+        <div class="row d-flex align-items-center justify-content-center h-75 middle">
+            <div class="col-md-8 col-lg-7 col-xl-6 pt-2">
                 <div  class="croissant_svg">
-                    <svg class="croissant_svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0" y="0" width="1012.021" height="646.707" viewBox="0, 0, 1012.021, 646.707">
+                    <svg class="croissant_svg svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0" y="0" width="1012.021" height="646.707" viewBox="0, 0, 1012.021, 646.707">
                         <g id="Layer_1">
                             <path d="M1012.021,608.726 C992.078,673.756 902.331,655.934 737.306,550.199 L889.57,298.626 C945.094,396.29 1004.734,492.365 1012.021,608.726 z" fill="#AA310C" id="path5414"/>
                             <path d="M745.944,305.717 C648.357,382.507 641.679,573.579 612.37,565.165 C561.606,546.573 515.378,432.977 595.332,292.557 C685.674,133.895 798.339,55.992 834.494,134.119 C898.971,273.419 806.872,217.146 745.944,305.717 z" fill="#E46E24" id="path5398" opacity="0.874"/>
@@ -46,7 +37,7 @@
                     </svg>
                 </div>
             </div>
-            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 pt-3">
                 <form name="f" th:action="@{/login}" method="post">
                     <!-- Message-->
                     <div th:if="${param.error}" class="alert alert-danger">
@@ -72,7 +63,7 @@
                         <div >
                             <label> Vous n'avez pas de compte? </label>
                         </div>
-                        <a th:href="@{/createAccount}">S'inscrire</a>
+                        <a th:href="@{/signup}">S'inscrire</a>
                     </div>
 
                     <!-- Submit button -->
@@ -83,10 +74,7 @@
         </div>
     </div>
 </section>
-
+<span th:replace="layouts/foot :: foot"></span>
 </body>
-<script
-        type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"
-></script>
+
 </html>

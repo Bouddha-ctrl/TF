@@ -63,6 +63,18 @@ public class CroissantshowApplication implements CommandLineRunner {
 
 		uDao.save(user2);
 
+		User user3 = User.builder()
+				.role(role2)
+				.enabled(false)
+				.email("email@email.com")
+				.username("useruser2")
+				.password("useruser")
+				.lastname("nom")
+				.firstname("prenom")
+				.build();
+
+		uDao.save(user3);
+
 	}
 
 

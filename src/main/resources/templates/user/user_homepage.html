@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
     User home page</br>
-    Hello :<div sec:authentication="name"></div></br>
+    first  name :<span th:text ="${#authentication.getPrincipal().getFirstName()}"></span></br>
     Role  :<div sec:authentication="principal.authorities"></div>
 </body>
 </html>
