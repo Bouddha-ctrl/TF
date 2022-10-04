@@ -2,20 +2,35 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>users list</title>
+    <span th:replace="layouts/head :: head"></span>
 </head>
 <body>
+<span th:replace="layouts/navbar :: admin_navbar"></span>
 <h1>All Users </h1>
 
 <table style="border: 1px solid;">
     <tr>
         <th>username</th>
         <th>firstname</th>
+        <th>enabled</th>
+        <th>action</th>
     </tr>
     <tr th:each="user : ${users}">
         <td th:utext="${user.username}"></td>
         <td th:utext="${user.firstname}"></td>
+        <td th:utext="${user.enabled}"></td>
+
+        <td th:if="${user.enabled == true}">
+            <a th:href="@{'/admin/disable/' + ${user.id}}">disable me</a>
+        </td>
+        <td th:if="${user.enabled != true}">
+            <a th:href="@{'/admin/enable/' + ${user.id}}">enable me</a>
+        </td>
+
+
     </tr>
 </table>
+<span th:replace="layouts/foot :: foot"></span>
 </body>
 </html>

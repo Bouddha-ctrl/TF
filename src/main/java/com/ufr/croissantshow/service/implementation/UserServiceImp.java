@@ -51,4 +51,10 @@ public class UserServiceImp implements IUserService {
         userDao.save(user);
     }
 
+    @Override
+    public void disableUser(User user) {
+        user.setEnabled(false);
+        userDao.save(user);
+    }
+
 }

@@ -17,5 +17,6 @@ public interface IUserService {
     public List<User> getAllUsers();
 
     public void enableUser(User user);
+    public void disableUser(User user);
 
 }

@@ -44,16 +44,6 @@ public class UserController {
         return "admin/userList";
     }
 
-    @RequestMapping("/admin/enableuser/list")
-    public String enableuserList(Model model){
-        List<User> users = userService.getAllUsers()
-                .stream().filter(user -> !user.isEnabled())
-                .collect(Collectors.toList());
-        model.addAttribute("users",users);
-
-        return "admin/enableUserList";
-    }
-
     @GetMapping("/admin/enable/{id}")
     public String enableUser(@PathVariable("id") String id)  {
         try{
@@ -63,7 +53,18 @@ public class UserController {
 
         }
 
-        return "redirect:/admin/enableuser/list";
+        return "redirect:/admin/user/list";
+    }
+
+    @GetMapping("/admin/disable/{id}")
+    public String disableUser(@PathVariable("id") String id)  {
+        try{
+            User user = userService.getUserById(Integer.parseInt(id));
+            userService.disableUser(user);
+        }catch(Exception ex){
+
+        }
+        return "redirect:/admin/user/list";
     }
 
     @RequestMapping("/login")
