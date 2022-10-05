@@ -22,7 +22,7 @@ class UserServiceImpTest {
 
         User user = User.builder()
                 .enabled(false)
-                .username("user1user1")
+                .username("user1ueeeser1")
                 .password("password")
                 .lastname("nom")
                 .firstname("prenom")

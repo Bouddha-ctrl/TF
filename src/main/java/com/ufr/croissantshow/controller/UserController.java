@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,24 +21,24 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String accueil(){
         return "accueil";
     }
 
-    @RequestMapping("/user/home")
+    @GetMapping("/user/home")
     public String userHomePage(){
 
         return "user/user_homepage"; // ressource/templates/...
     }
 
-    @RequestMapping("/admin/home")
+    @GetMapping("/admin/home")
     public String adminHomePage(){
 
         return "admin/admin_homepage";
     }
 
-    @RequestMapping("/admin/user/list")
+    @GetMapping("/admin/user/list")
     public String userList(Model model){
         List<User> users = userService.getAllUsers();
         model.addAttribute("users",users);
@@ -53,7 +54,6 @@ public class UserController {
         }catch(Exception ex){
 
         }
-
         return "redirect:/admin/user/list";
     }
 
@@ -68,13 +68,13 @@ public class UserController {
         return "redirect:/admin/user/list";
     }
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String login(){
 
         return "login";
     }
 
-    @RequestMapping("/signup")
+    @GetMapping("/signup")
     public String signup(Model model){
         model.addAttribute("user",new User());
         return "create_account";
@@ -94,5 +94,40 @@ public class UserController {
         return "redirect:/";
     }
 
+    @GetMapping("/profil")
+    public String profil(Principal principal, Model model){
 
+        String username = principal.getName();
+        try{
+            User user = userService.getUserByUsername(username);
+            model.addAttribute("user",user);
+        }catch(UserNotFoundException ex){
+            return "error/500";
+        }
+        return "profil";
+    }
+
+
+    @PostMapping("/updateUser")
+    public String updateUser(@ModelAttribute("user") @Valid User user,BindingResult result, Principal principal, Model model){
+
+        if (result.hasErrors()) {
+            return "profil";
+        }
+        String username = principal.getName();
+        if (!username.equals(user.getUsername())){
+            user.setUsername(username);
+            result.rejectValue("username","error.user","Username can not be changed!");
+            return "profil";
+        }
+        try{
+            User user2 = userService.getUserByUsername(username);
+            user.setId(user2.getId());
+            userService.updateUser(user);
+        }catch(UserNotFoundException ex){
+            return "error/500";
+        }
+
+        return "redirect:/profil?success";
+    }
 }

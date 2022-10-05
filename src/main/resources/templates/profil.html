@@ -1,14 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <link  rel="stylesheet" />
     <span th:replace="layouts/head :: head"></span>
-    <title>Create account</title>
+    <title>Profil</title>
 </head>
 <body>
-    <span th:replace="layouts/navbar :: accueil_navbar"></span>
+    <!-- navbar -->
+    <div sec:authorize="isAuthenticated()">
+        <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+            <span th:replace="layouts/navbar :: admin_navbar"></span>
+        </div>
+        <div sec:authorize="hasAuthority('ROLE_USER')">
+            <span th:replace="layouts/navbar :: user_navbar"></span>
+        </div>
+    </div>
+
+    <div data-th-if="${param.error!= null}">
+
+    </div>
+
     <div class="container py-5 h-100 w-50">
-        <form name="f" th:action="@{/createUser}" method="post" th:object="${user}" novalidate>
+        <form name="f" th:action="@{/updateUser}" method="post" th:object="${user}" novalidate>
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="row mb-4">
                 <div class="col">
@@ -39,7 +52,8 @@
 
             <!-- Username input -->
             <div class="form-outline mb-4">
-                <input th:field="*{username}" type="text" id="form3Example4" class="form-control" />
+                <input th:field="*{username}" type="text" id="form3Example4" class="form-control" disabled/>
+                <input th:field="*{username}" type="text" id="form3Exampl" class="form-control" hidden/>
                 <div class="erreur" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username
                     Error</div>
                 <label class="form-label" for="form3Example4">username</label>
@@ -47,14 +61,14 @@
 
             <!-- Password input -->
             <div class="form-outline mb-4">
-                <input th:field="*{password}" type="password" id="form3Example5" class="form-control" />
+                <input th:field="*{password}" type="text" id="form3Example5" class="form-control" />
                 <div class="erreur" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password
                     Error</div>
                 <label class="form-label" for="form3Example5">Password</label>
             </div>
 
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
+            <button type="submit" class="btn btn-primary btn-block mb-4">Mettre à jour</button>
 
         </form>
     </div>

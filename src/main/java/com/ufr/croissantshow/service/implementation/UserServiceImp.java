@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImp implements IUserService {
@@ -39,6 +40,12 @@ public class UserServiceImp implements IUserService {
     public User getUserById(int userId) throws UserNotFoundException {
 
         return userDao.findById(userId).orElseThrow(UserNotFoundException::new);
+    }
+
+    @Override
+    public User getUserByUsername(String username) throws UserNotFoundException{
+        Optional<User> user = Optional.of(userDao.getUserByUsername(username));
+        return user.orElseThrow(UserNotFoundException::new);
     }
 
     @Override
