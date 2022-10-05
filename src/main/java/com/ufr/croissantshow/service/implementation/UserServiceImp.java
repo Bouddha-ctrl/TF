@@ -8,6 +8,7 @@ import com.ufr.croissantshow.modele.User;
 import com.ufr.croissantshow.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,6 +56,11 @@ public class UserServiceImp implements IUserService {
     public void disableUser(User user) {
         user.setEnabled(false);
         userDao.save(user);
+    }
+
+    @Override
+    public boolean usarnameExiste(User user) {
+        return userDao.getUserByUsername(user.getUsername()) != null;
     }
 
 }

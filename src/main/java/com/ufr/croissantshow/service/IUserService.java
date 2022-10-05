@@ -19,4 +19,6 @@ public interface IUserService {
     public void enableUser(User user);
     public void disableUser(User user);
 
+    public boolean usarnameExiste(User user);
+
 }

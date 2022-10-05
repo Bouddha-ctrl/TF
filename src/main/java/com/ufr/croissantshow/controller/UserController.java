@@ -7,6 +7,7 @@ import com.ufr.croissantshow.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -80,8 +81,15 @@ public class UserController {
     }
 
     @PostMapping(value = "/createUser")
-    public String createUser(@ModelAttribute("user") User user){ //@Valid
-
+    public String createUser(@ModelAttribute("user") @Valid User user, BindingResult result, Model model){ //@Valid
+        if (result.hasErrors()) {
+            return "create_account";
+        }
+        boolean usernameExiste = userService.usarnameExiste(user);
+        if (usernameExiste) {
+            result.rejectValue("username","error.user","Username already exists");
+            return "create_account";
+        }
         userService.addUser(user);
         return "redirect:/";
     }
