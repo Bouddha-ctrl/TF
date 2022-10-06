@@ -1,11 +1,43 @@
 package com.ufr.croissantshow;
 
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.*;
+import io.cucumber.java.en.*;
+
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.is;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+//import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.junit.Assert;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+
+import java.time.Duration;
 
 public class testCroissant {
+
+    private WebDriver driver;
+    private String dockerServer = "http://172.20.128.60";
+    private String PORT = "8173";
+
+    @Before
+    public void setUp() {
+        WebDriverManager.firefoxdriver().setup();
+        FirefoxOptions options = new FirefoxOptions();
+        options.setHeadless(false);
+        driver = new FirefoxDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        //driver = new HtmlUnitDriver(true);
+    }
+
+    @After
+    public void tearDown() {
+        driver.quit();
+    }
+
 
     @Given("On est Mercredi")
     public void on_est_mercredi() {
@@ -22,14 +54,17 @@ public class testCroissant {
 
     @Given("L'utilisateur est sur la page principale du site et n'est pas connecté")
     public void l_utilisateur_est_sur_la_page_principale_du_site_et_n_est_pas_connecté() {
-        Assert.assertEquals(1,1);
+        driver.get(dockerServer+":"+PORT+"/login");
+        assertEquals(1, 1);
     }
     @When("L'utilisateur entre le pseudo {string} dans le champ pseudo")
     public void l_utilisateur_entre_le_pseudo_dans_le_champ_pseudo(String string) {
+        driver.findElement(By.xpath("//input[@id='form1Example13']")).sendKeys(string);
         Assert.assertEquals(1,1);
     }
     @When("L'utilisateur entre le mot de passe {string} dans le champ mot de passe")
     public void l_utilisateur_entre_le_mot_de_passe_dans_le_champ_mot_de_passe(String string) {
+        driver.findElement(By.xpath("//input[@id='form1Example23']")).sendKeys(string);
         Assert.assertEquals(1,1);
     }
     @Then("L'utilisateur arrive sur la page administrateur")
