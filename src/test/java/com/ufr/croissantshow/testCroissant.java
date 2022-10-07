@@ -10,10 +10,12 @@ import static org.hamcrest.CoreMatchers.is;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.*;
-//import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.junit.Assert;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
+// Local
+//import org.openqa.selenium.firefox.FirefoxDriver;
+//import org.openqa.selenium.firefox.FirefoxOptions;
+// Jenkins
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import java.time.Duration;
 import java.util.List;
@@ -26,12 +28,16 @@ public class testCroissant {
 
     @Before
     public void setUp() {
+        // Local
+        /*
         WebDriverManager.firefoxdriver().setup();
         FirefoxOptions options = new FirefoxOptions();
         options.setHeadless(false);
         driver = new FirefoxDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        //driver = new HtmlUnitDriver(true);
+        */
+        // Jenkins
+        driver = new HtmlUnitDriver(true);
     }
 
     @After
