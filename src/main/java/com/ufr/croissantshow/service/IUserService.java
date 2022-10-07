@@ -14,9 +14,13 @@ public interface IUserService {
     public void updateUser(User user) throws DataIntegrityViolationException;
 
     public User getUserById(int id) throws UserNotFoundException;
+
+    public User getUserByUsername(String username) throws UserNotFoundException;
     public List<User> getAllUsers();
 
     public void enableUser(User user);
     public void disableUser(User user);
+
+    public boolean usarnameExiste(User user);
 
 }

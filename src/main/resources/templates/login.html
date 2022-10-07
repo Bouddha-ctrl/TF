@@ -40,9 +40,16 @@
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 pt-3">
                 <form name="f" th:action="@{/login}" method="post">
                     <!-- Message-->
-                    <div th:if="${param.error}" class="alert alert-danger">
-                        Invalid username or password.
+                    <div class="alert alert-danger" data-th-if="${param.error != null    && session.SPRING_SECURITY_LAST_EXCEPTION != null}"
+                        >
+                        <div data-th-if="${session.SPRING_SECURITY_LAST_EXCEPTION.message == 'Bad credentials'}">
+                            Nom d'utilisateur ou mot de passe erroné
+                        </div>
+                        <div data-th-if="${session.SPRING_SECURITY_LAST_EXCEPTION.message == 'User is disabled'}">
+                            Compte désactivé
+                        </div>
                     </div>
+
                     <div th:if="${param.logout}" class="alert alert-success">
                         You have been logged out.
                     </div>

@@ -10,6 +10,4 @@ class CroissantshowApplicationTests {
 	void contextLoads() {
 	}
 
-
-
 }

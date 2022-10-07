@@ -4,6 +4,7 @@ import com.ufr.croissantshow.exception.UserNotFoundException;
 import com.ufr.croissantshow.modele.User;
 import com.ufr.croissantshow.service.IUserService;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,13 +17,11 @@ class UserServiceImpTest {
     @Autowired
     private IUserService userS;
 
-
     @Test
     void addUser() {
-
         User user = User.builder()
                 .enabled(false)
-                .username("user1user1")
+                .username("user1ueeeser1")
                 .password("password")
                 .lastname("nom")
                 .firstname("prenom")
@@ -39,7 +38,6 @@ class UserServiceImpTest {
 
     @Test
     void addUserWithSameUsername() {
-
         User user = User.builder()
                 .username("addUserWith")
                 .password("password")
@@ -52,12 +50,9 @@ class UserServiceImpTest {
                         .id(0)
                         .build();
 
-        try{
+        Assertions.assertThrows(DataIntegrityViolationException.class, () -> {
             userS.addUser(user2);
-            Assert.assertTrue(false);
-        }catch(DataIntegrityViolationException ex){
-            Assert.assertTrue(true);
-        }
+        });
     }
 
     @Test
@@ -69,12 +64,9 @@ class UserServiceImpTest {
                 .firstname("prenom")
                 .build();
 
-        try{
+        Assertions.assertThrows(TransactionSystemException.class, () -> {
             userS.addUser(user);
-            Assert.assertTrue(false);
-        }catch(TransactionSystemException ex){
-            Assert.assertTrue(true);
-        }
+        });
     }
 
     @Test
@@ -85,17 +77,13 @@ class UserServiceImpTest {
                 .firstname("prenom")
                 .build();
 
-        try{
+        Assertions.assertThrows(TransactionSystemException.class, () -> {
             userS.addUser(user);
-            Assert.assertTrue(false);
-        }catch(TransactionSystemException ex){
-            Assert.assertTrue(true);
-        }
+        });
     }
 
     @Test
     void enableUser(){
-
         User user = User.builder()
                 .username("enableUser")
                 .password("password")
@@ -112,7 +100,6 @@ class UserServiceImpTest {
 
     @Test
     void disableUser(){
-
         User user = User.builder()
                 .username("disableUser")
                 .password("password")
@@ -147,17 +134,8 @@ class UserServiceImpTest {
 
     @Test
     void getUnexistingUser(){
-
-        try{
-            User user2 = userS.getUserById(69);
-
-            Assert.assertTrue(false);
-        }catch(UserNotFoundException ex){
-            Assert.assertTrue(true);
-        }catch(Exception e){
-            Assert.assertTrue(false);
-        }
+        Assertions.assertThrows(UserNotFoundException.class, () -> {
+            userS.getUserById(69);
+        });
     }
-
-
 }

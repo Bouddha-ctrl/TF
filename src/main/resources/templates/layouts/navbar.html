@@ -1,5 +1,5 @@
 <navbar th:fragment="user_navbar">
-
+    
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <!-- Container wrapper -->
@@ -39,6 +39,11 @@
                 <!-- Left links -->
 
                 <div class="d-flex align-items-center">
+                    <a th:href="@{/profil}">
+                        <button type="button" class="btn btn-link px-3 me-2">
+                            Profil
+                        </button>
+                    </a>
                     <a th:href="@{/logout}">
                         <button type="button" class="btn btn-primary me-3">
                             logout
@@ -98,6 +103,11 @@
                 <!-- Left links -->
 
                 <div class="d-flex align-items-center">
+                    <a th:href="@{/profil}">
+                        <button type="button" class="btn btn-link px-3 me-2">
+                            Profil
+                        </button>
+                    </a>
                     <a th:href="@{/logout}">
                         <button type="button" class="btn btn-primary me-3">
                             logout
