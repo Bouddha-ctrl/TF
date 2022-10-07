@@ -83,7 +83,7 @@ class UserServiceImpTest {
     }
 
     @Test
-    void enableUser(){
+    void enableUser() throws UserNotFoundException {
         User user = User.builder()
                 .username("enableUser")
                 .password("password")
@@ -99,7 +99,7 @@ class UserServiceImpTest {
     }
 
     @Test
-    void disableUser(){
+    void disableUser() throws UserNotFoundException {
         User user = User.builder()
                 .username("disableUser")
                 .password("password")

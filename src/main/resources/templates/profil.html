@@ -16,8 +16,9 @@
         </div>
     </div>
 
-    <div data-th-if="${param.error!= null}">
-
+    <div data-th-if="${param.success!= null}" class="alert  alert-success fade show alert-dismissible" role="alert" data-mdb-color="success" id="customxD" bis_skin_checked="1">
+        <strong>L'utilisateur est modifié </strong>
+        <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
     </div>
 
     <div class="container py-5 h-100 w-50">

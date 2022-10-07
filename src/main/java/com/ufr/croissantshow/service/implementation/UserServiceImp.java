@@ -32,8 +32,13 @@ public class UserServiceImp implements IUserService {
     }
 
     @Override
-    public void updateUser(User user) throws DataIntegrityViolationException {
-        userDao.save(user);
+    public void updateUser(User olduser) throws DataIntegrityViolationException, UserNotFoundException {
+        User newUser = this.getUserByUsername(olduser.getUsername());
+        newUser.setFirstname(olduser.getFirstname());
+        newUser.setLastname(olduser.getLastname());
+        newUser.setEmail(olduser.getEmail());
+        newUser.setPassword(olduser.getPassword());
+        userDao.save(newUser);
     }
 
     @Override

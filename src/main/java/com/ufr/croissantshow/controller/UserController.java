@@ -121,10 +121,8 @@ public class UserController {
             return "profil";
         }
         try{
-            User user2 = userService.getUserByUsername(username);
-            user.setId(user2.getId());
             userService.updateUser(user);
-        }catch(UserNotFoundException ex){
+        }catch(Exception ex){
             return "error/500";
         }
 
