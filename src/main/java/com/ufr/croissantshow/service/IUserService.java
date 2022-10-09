@@ -12,12 +12,11 @@ public interface IUserService {
 
     public void addUser(User user) throws DataIntegrityViolationException;
     public void updateUser(User user) throws DataIntegrityViolationException, UserNotFoundException;
-
+    public void deleteUserById(int id) throws UserNotFoundException;;
     public User getUserById(int id) throws UserNotFoundException;
 
     public User getUserByUsername(String username) throws UserNotFoundException;
     public List<User> getAllUsers();
-
     public void enableUser(User user);
     public void disableUser(User user);
 

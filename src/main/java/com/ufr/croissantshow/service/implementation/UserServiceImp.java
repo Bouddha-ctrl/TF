@@ -42,6 +42,12 @@ public class UserServiceImp implements IUserService {
     }
 
     @Override
+    public void deleteUserById(int id) throws UserNotFoundException {
+        User user = this.getUserById(id);
+        userDao.delete(user);
+    }
+
+    @Override
     public User getUserById(int userId) throws UserNotFoundException {
 
         return userDao.findById(userId).orElseThrow(UserNotFoundException::new);

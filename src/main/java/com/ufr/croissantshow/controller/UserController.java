@@ -46,6 +46,19 @@ public class UserController {
         return "admin/userList";
     }
 
+    @GetMapping("/admin/delete/{id}")
+    public String deleteUser(@PathVariable("id") String id,Model model){
+        int idUser = Integer.parseInt(id);
+
+        try{
+            userService.deleteUserById(idUser);
+        }catch(Exception ex){
+            return "redirect:/admin/user/list?error";
+        }
+
+        return "redirect:/admin/user/list?success";
+    }
+
     @GetMapping("/admin/enable/{id}")
     public String enableUser(@PathVariable("id") String id)  {
         try{
@@ -128,4 +141,6 @@ public class UserController {
 
         return "redirect:/profil?success";
     }
+
+
 }
