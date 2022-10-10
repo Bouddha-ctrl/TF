@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImp implements IUserService {
@@ -61,7 +62,10 @@ public class UserServiceImp implements IUserService {
 
     @Override
     public List<User> getAllUsers() {
-        return userDao.findAll();
+        return userDao.findAll()
+                .stream()
+                .filter(user -> "ROLE_USER".equals(user.getRole().getRoleName()))
+                .collect(Collectors.toList());
     }
 
     @Override

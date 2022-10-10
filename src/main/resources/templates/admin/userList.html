@@ -9,11 +9,11 @@
 </head>
 <body>
     <span th:replace="layouts/navbar :: admin_navbar"></span>
-    <div data-th-if="${param.error!= null}" class="alert  alert-danger fade show alert-dismissible" role="alert" data-mdb-color="danger" id="customError" bis_skin_checked="1">
+    <div data-th-if="${param.error!= null}" class="alert alert-danger fade show alert-dismissible" role="alert" data-mdb-color="danger" id="customError" bis_skin_checked="1">
         <strong>Erreur</strong>
         <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
     </div>
-    <div data-th-if="${param.success!= null}" class="alert  alert-success fade show alert-dismissible" role="alert" data-mdb-color="success" id="customSuccess" bis_skin_checked="1">
+    <div data-th-if="${param.success!= null}" class="alert alert-success fade show alert-dismissible" role="alert" data-mdb-color="success" id="customSuccess" bis_skin_checked="1">
         <strong>L'utilisateur est supprimé</strong>
         <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
     </div>
@@ -37,18 +37,20 @@
                 <td >
                     <a th:href="@{'/admin/disable/' + ${user.id}}"
                        data-th-if="${user.enabled == true}"
-                       class="badge fa-sm badge-success rounded-pill d-inline">
+                       class="badge fa-sm badge-success rounded-pill d-inline"
+                       id="enable">
                             Enabled
                     </a>
                     <a th:href="@{'/admin/enable/' + ${user.id}}"
                        data-th-if="${user.enabled != true}"
-                       class="badge fa-sm badge-danger rounded-pill d-inline">
+                       class="badge fa-sm badge-danger rounded-pill d-inline"
+                       id="disable" >
                         Disabled
                     </a>
                 </td>
 
                 <td>
-                    <a th:href="@{'/admin/delete/' + ${user.id}}">
+                    <a data-bs-toggle="modal" data-bs-target="#modal1" th:name="${user.id}" onclick="setId(this)" id="delete">
                         <button type="button" class="btn btn-outline-danger">Delete</button>
                     </a>
                 </td>
@@ -58,8 +60,40 @@
             <tbody>
         </table>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">Are you sure you want to delete ?</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="modaldelete">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span th:replace="layouts/foot :: foot"></span>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
 <script>
+    var id;
+    //listener on delete on modal
+    try{
+        let confirm = document.querySelector("#modaldelete")
+        confirm.addEventListener('click',()=>{
+
+            location.replace("/admin/delete/"+id);
+        })
+    }catch(error){}
+
+    function setId(a){
+        this.id = a.getAttribute("name");
+    }
 
 </script>
 </html>
