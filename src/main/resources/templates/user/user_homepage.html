@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <span th:replace="layouts/head :: head"></span>
 </head>
 <body>
 <span th:replace="layouts/navbar :: user_navbar"></span>
     User home page</br>
     first  name :<span th:text ="${#authentication.getPrincipal().getFirstName()}"></span></br>
     Role  :<div sec:authentication="principal.authorities"></div>
+<span th:replace="layouts/foot :: foot"></span>
+
 </body>
 </html>

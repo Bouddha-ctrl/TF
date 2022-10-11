@@ -3,8 +3,10 @@ package com.ufr.croissantshow.controller;
 
 import com.ufr.croissantshow.exception.UserNotFoundException;
 import com.ufr.croissantshow.modele.User;
+import com.ufr.croissantshow.security.MyUserDetails;
 import com.ufr.croissantshow.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +24,14 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping("/")
-    public String accueil(){
+    public String accueil(Authentication authentication){
+        if (authentication != null){
+            MyUserDetails user = (MyUserDetails) authentication.getPrincipal();
+            if("ROLE_USER".equals(user.getRoleName()))
+                return "redirect:/user/home";
+            if("ROLE_ADMIN".equals(user.getRoleName()))
+                return "redirect:/admin/home";
+        }
         return "accueil";
     }
 

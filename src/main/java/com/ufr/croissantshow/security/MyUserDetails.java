@@ -43,6 +43,10 @@ public class MyUserDetails  implements UserDetails {
         return user.getLastname();
     }
 
+    public String getRoleName(){
+        return user.getRole().getRoleName();
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return !false;
