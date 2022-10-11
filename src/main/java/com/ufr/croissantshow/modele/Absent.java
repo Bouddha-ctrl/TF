@@ -25,6 +25,4 @@ public class Absent {
     @JoinColumn(name="mercredi_id")
     private Mercredi mercredi;
 
-    @Enumerated(EnumType.STRING)
-    private RaisonAbsence raison;
 }
