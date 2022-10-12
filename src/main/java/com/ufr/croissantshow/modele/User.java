@@ -10,6 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -64,4 +65,14 @@ public class User {
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "presents")
     private List<Mercredi> attendedMercredi;
+
+    public void addMercredi(Mercredi mercredi){
+        if (mercredi == null)
+            return;
+
+        if (this.attendedMercredi == null)
+            this.attendedMercredi = new ArrayList<Mercredi>();
+
+        this.attendedMercredi.add(mercredi);
+    }
 }

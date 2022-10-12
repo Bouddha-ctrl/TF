@@ -69,6 +69,14 @@ public class UserServiceImp implements IUserService {
     }
 
     @Override
+    public List<User> getAllEnabledUsers() {
+        return userDao.findAll()
+                .stream()
+                .filter(user -> "ROLE_USER".equals(user.getRole().getRoleName()) && user.isEnabled())
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void enableUser(User user) {
         user.setEnabled(true);
         userDao.save(user);

@@ -2,8 +2,10 @@ package com.ufr.croissantshow.modele;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +21,8 @@ public class Mercredi {
     @GenericGenerator(name = "increment", strategy = "increment")
     private int id;
 
-    @Column
+
+    @Temporal(TemporalType.DATE)
     private Date date;
 
     @Column
@@ -32,10 +35,23 @@ public class Mercredi {
             inverseJoinColumns = @JoinColumn(name = "utilisateur_id"))
     private List<User> presents;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mercredi")
-    private List<Absent> absents;
-
     @ManyToOne
     @JoinColumn(name="responsable_id")
     private User responsable;
+
+    public List<User> getPresents(){
+        if (this.presents == null)
+            this.presents = new ArrayList<User>();
+        return this.presents;
+    }
+    public void addUser(User user){
+        if (user == null)
+            return;
+
+        if (this.presents == null)
+            this.presents = new ArrayList<User>();
+
+        presents.add(user);
+        user.addMercredi(this);
+    }
 }

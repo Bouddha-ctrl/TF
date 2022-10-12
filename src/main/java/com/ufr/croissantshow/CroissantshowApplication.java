@@ -1,9 +1,12 @@
 package com.ufr.croissantshow;
 
+import com.ufr.croissantshow.dao.IMercrediDao;
 import com.ufr.croissantshow.dao.IRoleDao;
 import com.ufr.croissantshow.dao.IUserDao;
+import com.ufr.croissantshow.modele.Mercredi;
 import com.ufr.croissantshow.modele.Role;
 import com.ufr.croissantshow.modele.User;
+import com.ufr.croissantshow.service.IMercrediService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,12 +14,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+import java.util.Calendar;
+import java.util.Date;
+
 @SpringBootApplication
 
 public class CroissantshowApplication implements CommandLineRunner {
 
 	@Autowired
 	private IUserDao uDao;
+
+	@Autowired
+	private IMercrediService mService;
 
 	@Autowired
 	private IRoleDao rDao;
@@ -75,6 +88,28 @@ public class CroissantshowApplication implements CommandLineRunner {
 
 		uDao.save(user3);
 
+		Date next =new SimpleDateFormat("yyyy-MM-dd")
+				.parse(LocalDate.now().with(
+									TemporalAdjusters.next( DayOfWeek.WEDNESDAY )
+									)
+								.toString());
+		Date prev =new SimpleDateFormat("yyyy-MM-dd")
+				.parse(LocalDate.now().with(
+								TemporalAdjusters.previous( DayOfWeek.WEDNESDAY )
+						)
+						.toString());
+
+
+		Mercredi mercredi1 = Mercredi.builder()
+				.date(next)
+				.build();
+
+		Mercredi mercredi2 = Mercredi.builder()
+				.date(prev)
+				.build();
+
+		mService.addMercredi(mercredi1);
+		mService.addMercredi(mercredi2);
 	}
 
 

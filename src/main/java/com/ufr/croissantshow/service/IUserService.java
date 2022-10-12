@@ -17,6 +17,9 @@ public interface IUserService {
 
     public User getUserByUsername(String username) throws UserNotFoundException;
     public List<User> getAllUsers();
+
+    public List<User> getAllEnabledUsers();
+
     public void enableUser(User user);
     public void disableUser(User user);
 
