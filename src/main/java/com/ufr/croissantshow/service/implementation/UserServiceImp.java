@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,14 +49,15 @@ public class UserServiceImp implements IUserService {
 
     @Override
     public User getUserById(int userId) throws UserNotFoundException {
-
         return userDao.findById(userId).orElseThrow(UserNotFoundException::new);
     }
 
     @Override
-    public User getUserByUsername(String username) throws UserNotFoundException{
-        Optional<User> user = Optional.of(userDao.getUserByUsername(username));
-        return user.orElseThrow(UserNotFoundException::new);
+    public User getUserByUsername(String username) throws UserNotFoundException {
+        User user = userDao.getUserByUsername(username);
+        if(user == null)
+            throw new UserNotFoundException();
+        return user;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class UserServiceImp implements IUserService {
     }
 
     @Override
-    public boolean usarnameExiste(User user) {
+    public boolean isUsernameExists(User user) {
         return userDao.getUserByUsername(user.getUsername()) != null;
     }
 

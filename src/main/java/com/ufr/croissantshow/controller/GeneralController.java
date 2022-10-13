@@ -51,7 +51,7 @@ public class GeneralController {
         if (result.hasErrors()) {
             return "create_account";
         }
-        boolean usernameExiste = userService.usarnameExiste(user);
+        boolean usernameExiste = userService.isUsernameExists(user);
         if (usernameExiste) {
             result.rejectValue("username","error.user","Username already exists");
             return "create_account";

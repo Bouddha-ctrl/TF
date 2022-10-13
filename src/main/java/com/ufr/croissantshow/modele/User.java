@@ -75,4 +75,18 @@ public class User {
 
         this.attendedMercredi.add(mercredi);
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", email='" + email + '\'' +
+                ", enabled=" + enabled +
+                ", createdAt=" + createdAt +
+                ", role=" + role +
+                '}';
+    }
 }

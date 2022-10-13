@@ -3,7 +3,6 @@ package com.ufr.croissantshow.service;
 
 import com.ufr.croissantshow.exception.UserNotFoundException;
 import com.ufr.croissantshow.modele.User;
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.List;
@@ -23,6 +22,6 @@ public interface IUserService {
     public void enableUser(User user);
     public void disableUser(User user);
 
-    public boolean usarnameExiste(User user);
+    public boolean isUsernameExists(User user);
 
 }
