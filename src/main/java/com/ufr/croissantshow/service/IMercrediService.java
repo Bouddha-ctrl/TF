@@ -10,7 +10,7 @@ public interface IMercrediService {
 
     public void addMercredi(Mercredi mercredi) throws DataIntegrityViolationException;
 
-    public void updateMercredi(Mercredi mercredi) throws DataIntegrityViolationException, MercrediNotFoundException;
+    public void updateMercredi(Mercredi mercredi) throws DataIntegrityViolationException;
 
     public void annulerMercredi(Mercredi mercredi);
 

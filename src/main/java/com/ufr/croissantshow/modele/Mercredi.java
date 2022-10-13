@@ -28,7 +28,7 @@ public class Mercredi {
     @Column
     private boolean mercrediAnnule; // Si l'admin l'a annulé (jour férié ect) ou si il n'y a pas de responsable
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "utilisateur_present",
             joinColumns = @JoinColumn(name = "mercredi_id"),
@@ -44,6 +44,18 @@ public class Mercredi {
             this.presents = new ArrayList<User>();
         return this.presents;
     }
+
+    public void setPresents(List<User> users){
+        if(this.presents == null)
+            this.presents = new ArrayList<User>();
+        else{
+            for(User u:this.presents){
+                u.removeMercredi(this);
+            }
+            this.presents.clear();
+        }
+        this.presents.addAll(users);
+    }
     public void addUser(User user){
         if (user == null)
             return;
@@ -52,6 +64,11 @@ public class Mercredi {
             this.presents = new ArrayList<User>();
 
         presents.add(user);
-        user.addMercredi(this);
+    }
+
+    public void removeUser(User user){ //do not use
+        if (!presents.contains(user))
+            return;
+        presents.remove(user);
     }
 }

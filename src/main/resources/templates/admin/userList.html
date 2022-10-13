@@ -35,12 +35,12 @@
                 <td th:utext="${user.lastname}"></td>
                 <td th:utext="${user.firstname}"></td>
                 <td >
-                    <a th:href="@{'/admin/disable/' + ${user.id}}"
+                    <span
                        data-th-if="${user.enabled == true}"
                        class="badge fa-sm badge-success rounded-pill d-inline"
                        id="enable">
                             Enabled
-                    </a>
+                    </span>
                     <a th:href="@{'/admin/enable/' + ${user.id}}"
                        data-th-if="${user.enabled != true}"
                        class="badge fa-sm badge-danger rounded-pill d-inline"

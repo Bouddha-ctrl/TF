@@ -79,6 +79,7 @@ public class UserServiceImp implements IUserService {
     @Override
     public void enableUser(User user) {
         user.setEnabled(true);
+
         userDao.save(user);
     }
 
@@ -93,4 +94,8 @@ public class UserServiceImp implements IUserService {
         return userDao.getUserByUsername(user.getUsername()) != null;
     }
 
+    private void addUserToAllMercredi(User user){
+
+
+    }
 }

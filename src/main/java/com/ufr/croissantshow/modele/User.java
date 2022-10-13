@@ -60,20 +60,41 @@ public class User {
     @JoinColumn(name="ROLE_ID")
     private Role role;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private List<Absent> absentList;
-
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "presents")
-    private List<Mercredi> attendedMercredi;
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "presents",cascade = CascadeType.REMOVE)
+    private List<Mercredi> mercredis;
 
     public void addMercredi(Mercredi mercredi){
         if (mercredi == null)
             return;
 
-        if (this.attendedMercredi == null)
-            this.attendedMercredi = new ArrayList<Mercredi>();
+        if (this.mercredis == null)
+            this.mercredis = new ArrayList<Mercredi>();
 
-        this.attendedMercredi.add(mercredi);
+        this.mercredis.add(mercredi);
+        mercredi.addUser(this);
+    }
+
+    public void removeMercredi(Mercredi mercredi){ //do not use
+        if(!mercredis.contains(mercredi))
+            return;
+        mercredis.remove(mercredi);
+    }
+    public List<Mercredi> getMercredis(){
+        if (this.mercredis == null)
+            this.mercredis = new ArrayList<Mercredi>();
+        return this.mercredis;
+    }
+
+    public void setMercredis(List<Mercredi> mercredis) {
+        if(this.mercredis == null)
+            this.mercredis = new ArrayList<Mercredi>();
+        else{
+            for(Mercredi m:this.mercredis){
+                m.removeUser(this);
+            }
+            this.mercredis.clear();
+        }
+        this.mercredis.addAll(mercredis);
     }
 
     @Override

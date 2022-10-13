@@ -34,8 +34,8 @@ public class MercrediServiceImp implements IMercrediService {
     }
 
     @Override
-    public void updateMercredi(Mercredi mercredi) throws DataIntegrityViolationException, MercrediNotFoundException {
-
+    public void updateMercredi(Mercredi mercredi) throws DataIntegrityViolationException {
+        mDao.save(mercredi);
     }
 
     @Override
