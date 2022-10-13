@@ -67,8 +67,13 @@ public class Mercredi {
     }
 
     public void removeUser(User user){ //do not use
-        if (!presents.contains(user))
-            return;
         presents.remove(user);
+    }
+
+    public boolean containUserByUsername(String username){
+        System.out.println(username);
+        return this.presents
+                .stream()
+                .anyMatch(user -> user.getUsername().equals(username));
     }
 }

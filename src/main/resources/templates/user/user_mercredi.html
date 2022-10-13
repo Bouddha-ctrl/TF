@@ -57,15 +57,28 @@
                         Responsable
                     </span>
                     <span th:if="${mercredi.responsable== null}">
+                        <span th:if="${mercredi.mercrediAnnule != true}">
 
                             <a th:href="${'/user/responsable/'+mercredi.id}" id="beManager">
                                 <button type="button" class="btn btn-success">Devenir le responsable</button>
                             </a>
-
+                        </span>
+                        <span th:if="${mercredi.mercrediAnnule == true}">
+                                Aucun Responsable
+                        </span>
                     </span>
-                </td>
-                <td></td>
 
+                </td>
+                <td>
+                    <a th:if="${mercredi.containUserByUsername(#authentication.getPrincipal().getUsername()) != true}"
+                       th:href="${'/user/subscribe/'+mercredi.id}" id="inscrire">
+                        <button type="button" class="btn btn-success">subscribe</button>
+                    </a>
+                    <a th:if="${mercredi.containUserByUsername(#authentication.getPrincipal().getUsername()) == true}"
+                       th:href="${'/user/unsubscribe/'+mercredi.id}" id="desinscrire">
+                        <button type="button" class="btn btn-warning">unsubscribe</button>
+                    </a>
+                </td>
             </tr>
             <tbody>
         </table>
