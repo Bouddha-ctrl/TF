@@ -3,7 +3,8 @@ package com.ufr.croissantshow;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.*;
+import io.cucumber.java.Before;
+import io.cucumber.java.After;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -28,7 +29,7 @@ public class testCroissant {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         */
         // Jenkins
-        driver = new HtmlUnitDriver(true);
+        driver = new HtmlUnitDriver(false);
     }
 
     @After
