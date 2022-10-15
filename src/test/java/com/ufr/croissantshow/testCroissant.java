@@ -9,17 +9,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static com.ufr.croissantshow.Common.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.core.IsNot.not;
+import static org.junit.Assert.*;
 
 public class testCroissant {
-
-    private static WebDriver driver;
-    private static String dockerServer = "http://172.20.128.60";
-    private static String PORT = "8173";
-
-    private static final String ADMIN_LOGIN="adminadmin";
-    private static final String ADMIN_PASSWORD="adminadmin";
 
     @Before
     public void setUp() {
@@ -33,7 +28,7 @@ public class testCroissant {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         */
         // Jenkins
-        driver = new HtmlUnitDriver(false);
+         driver = new HtmlUnitDriver(false);
     }
 
     @After
@@ -60,9 +55,12 @@ public class testCroissant {
      */
     @Given("L'utilisateur est sur la page principale du site et n'est pas connecté")
     public static void l_utilisateur_est_sur_la_page_principale_du_site_et_n_est_pas_connecté() {
-        //la page principale ne devrait pas être le login TODO start at homepage then go to login
-        driver.get(dockerServer+":"+PORT+"/login");
-        assertTrue(driver.findElements(By.id("form1Example13") ).size()!=0);
+        accessPage("");
+        accessPage("login");
+        assertNotEquals(driver.findElement(By.cssSelector(".btn-link")).getText(), "PROFIL");
+        assertEquals("Connexion",driver.findElement(By.cssSelector(".btn-link")).getText());
+        goToConnexion();
+
     }
     @When("L'utilisateur entre le pseudo {string} dans le champ pseudo")
     public static void l_utilisateur_entre_le_pseudo_dans_le_champ_pseudo(String string) {
@@ -99,7 +97,7 @@ public class testCroissant {
 
     @When("L'utilisateur entre son pseudo dans le champ pseudo")
     public void l_utilisateur_entre_son_pseudo_dans_le_champ_pseudo() {
-        driver.get(dockerServer+":"+PORT+"/login");
+        Common.accessPage("login");
         driver.findElement(By.xpath("//input[@id='form1Example13']")).sendKeys("useruser");
         assertEquals(1,1);
     }
@@ -117,7 +115,7 @@ public class testCroissant {
 
     @When("L'utilisateur entre un pseudo dans le champ pseudo")
     public void l_utilisateur_entre_un_pseudo_dans_le_champ_pseudo() {
-        driver.get(dockerServer+":"+PORT+"/login");
+        Common.accessPage("login");
         driver.findElement(By.xpath("//input[@id='form1Example13']")).sendKeys("userpasinscrit");
        assertEquals(1,1);}
     @When("L'utilisateur entre un mot de passe dans le champ mot de passe")
@@ -134,7 +132,7 @@ public class testCroissant {
 
     @When("L'utilisateur entre un bon pseudo dans le champ pseudo")
     public void l_utilisateur_entre_un_bon_pseudo_dans_le_champ_pseudo() {
-        driver.get(dockerServer+":"+PORT+"/login");
+        Common.accessPage("login");
         driver.findElement(By.xpath("//input[@id='form1Example13']")).sendKeys("useruser");
     }
     @When("L'utilisateur entre un bon mot de passe dans le champ mot de passe")
@@ -151,7 +149,7 @@ public class testCroissant {
 
     @Given("L'utilisateur est connecté sur le site")
     public void l_utilisateur_est_connecté_sur_le_site() {
-        driver.get(dockerServer + ":" + PORT + "/login");
+        Common.accessPage("login");
         driver.findElement(By.xpath("//input[@id='form1Example13']")).sendKeys("useruser");
         driver.findElement(By.xpath("//input[@id='form1Example23']")).sendKeys("useruser");
         driver.findElement(By.cssSelector("body > section > div > div > div.col-md-7.col-lg-5.col-xl-5.offset-xl-1.pt-3 > form > button")).click();
