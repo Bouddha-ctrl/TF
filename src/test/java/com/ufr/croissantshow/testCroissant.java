@@ -18,6 +18,9 @@ public class testCroissant {
     private String dockerServer = "http://172.20.128.60";
     private String PORT = "8173";
 
+    private final String ADMIN_LOGIN="adminadmin";
+    private final String ADMIN_PASSWORD="adminadmin";
+
     @Before
     public void setUp() {
         // Local
@@ -51,6 +54,9 @@ public class testCroissant {
         assertEquals(1,1);
     }
 
+    /*
+            81 starts here
+     */
     @Given("L'utilisateur est sur la page principale du site et n'est pas connecté")
     public void l_utilisateur_est_sur_la_page_principale_du_site_et_n_est_pas_connecté() {
         driver.get(dockerServer+":"+PORT+"/login");
@@ -59,19 +65,35 @@ public class testCroissant {
     @When("L'utilisateur entre le pseudo {string} dans le champ pseudo")
     public void l_utilisateur_entre_le_pseudo_dans_le_champ_pseudo(String string) {
         driver.findElement(By.xpath("//input[@id='form1Example13']")).sendKeys(string);
-        assertEquals(1, 1);
     }
     @When("L'utilisateur entre le mot de passe {string} dans le champ mot de passe")
     public void l_utilisateur_entre_le_mot_de_passe_dans_le_champ_mot_de_passe(String string) {
         driver.findElement(By.xpath("//input[@id='form1Example23']")).sendKeys(string);
-        assertEquals(1,1);
     }
+    /*
+    valide d'abord le login avant de vérifier l'arrivé sur la page d'inscription
+     */
     @Then("L'utilisateur arrive sur la page administrateur")
     public void l_utilisateur_arrive_sur_la_page_administrateur() {
-        //Assert.assertEquals(1,1);
         driver.findElement(By.cssSelector("body > section > div > div > div.col-md-7.col-lg-5.col-xl-5.offset-xl-1.pt-3 > form > button")).click();
-        assertTrue(driver.findElements(By.cssSelector("#navbarButtonsExample3 > ul > li:nth-child(2) > a")).size()!=0);
+       // assertTrue(driver.findElements(By.cssSelector("#navbarButtonsExample3 > ul > li:nth-child(2) > a")).size()!=0);
+        String test= driver.getCurrentUrl();
+        assertEquals("http://172.20.128.60:8173/admin/home",test);
     }
+
+    //alternative comportment of 81
+    @When("L'utilisateur entre le pseudo de l'administrateur dans le champ pseudo")
+    public void l_utilisateur_entre_le_pseudo_de_l_administrateur_dans_le_champ_pseudo() {
+        driver.findElement(By.xpath("//input[@id='form1Example13']")).sendKeys(ADMIN_LOGIN);
+    }
+    @When("L'utilisateur entre le mot de passe de l'administrateur dans le champ mot de passe")
+    public void l_utilisateur_entre_le_mot_de_passe_de_l_administrateur_dans_le_champ_mot_de_passe() {
+        driver.findElement(By.xpath("//input[@id='form1Example23']")).sendKeys(ADMIN_PASSWORD);
+    }
+
+    /*
+            81 ends here
+     */
 
     @When("L'utilisateur entre son pseudo dans le champ pseudo")
     public void l_utilisateur_entre_son_pseudo_dans_le_champ_pseudo() {
@@ -177,14 +199,7 @@ public class testCroissant {
 
     }
 
-    @When("L'utilisateur entre le pseudo de l'administrateur dans le champ pseudo")
-    public void l_utilisateur_entre_le_pseudo_de_l_administrateur_dans_le_champ_pseudo() {
-        assertEquals(1,1);
-    }
-    @When("L'utilisateur entre le mot de passe de l'administrateur dans le champ mot de passe")
-    public void l_utilisateur_entre_le_mot_de_passe_de_l_administrateur_dans_le_champ_mot_de_passe() {
-        assertEquals(1,1);
-    }
+
 
     @Then("L'utilisateur arrive sur la page d'accueil en etant connecté")
     public void l_utilisateur_arrive_sur_la_page_d_accueil_en_etant_connecté() {
