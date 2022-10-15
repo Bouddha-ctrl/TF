@@ -11,7 +11,7 @@ Feature: Interface de connexion des utilisateurs / administrateur
     
     Scenario: Connexion d'un utilisateur refusé
     Given Un utilisateur veut se connecter
-    And L'utilisateur n'a pas été validé par l administrateur
+    And L'utilisateur n a pas été validé par l administrateur
     When L'utilisateur entre ses identifiants corrects
     Then L'utilisateur reçoit un message le prévenant que son compte n est pas actif
     

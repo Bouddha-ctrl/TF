@@ -26,9 +26,9 @@ Feature: Un utilisateur connecté peut se désinscrire pour les prochaines dates
 Feature: Un utilisateur connecté peut se proposer responsable du prochain Croissant Show.
   
   Scenario: Responsable pas inscrit
-    Given l'utilisateur tente de se proposer responsable du prochain Croissant Show, auquel il n'est pas inscrit
+    Given l'utilisateur tente de se proposer responsable du prochain Croissant Show, auquel il n est pas inscrit
     When l'utilisateur clique sur le bouton devenir responsable
-    Then un message d'erreur demande à l'utilisateur de s'inscrire à cette date
+    Then un message d'erreur demande à l utilisateur de s inscrire à cette date
     
   Scenario: Responsable du prochain Croissant Show
     Given l'utilisateur est inscrit au prochain Croissant Show
