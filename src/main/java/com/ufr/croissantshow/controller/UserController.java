@@ -36,17 +36,47 @@ public class UserController {
     }
 
     @GetMapping("/responsable/{id}")
-    public String beManager(@PathVariable("id") String idMercredi, Principal pricipale, Model model){
+    public String beManager(@PathVariable("id") String id, Principal pricipale, Model model){
 
         try{
+            int idMercredi = Integer.parseInt(id);
             User user = userService.getUserByUsername(pricipale.getName());
-            Mercredi mercredi = mService.getMercrediById(Integer.parseInt(idMercredi));
-            mercredi.setResponsable(user);
-            mService.updateMercredi(mercredi);
+            Mercredi mercredi = mService.getMercrediById(idMercredi);
+
+            mService.setMercrediResponsable(mercredi, user);
         }catch(Exception ex){
             return "redirect:/user/mercredi?error";
         }
+        return "redirect:/user/mercredi?success";
+    }
 
+    @GetMapping("/subscribe/{id}")
+    public String subscribe(@PathVariable("id") String id, Principal pricipale, Model model){
+
+        try{
+            int idMercredi = Integer.parseInt(id);
+            User user = userService.getUserByUsername(pricipale.getName());
+            Mercredi mercredi = mService.getMercrediById(idMercredi);
+
+            mService.subscribe(mercredi, user);
+        }catch (Exception ex){
+            return "redirect:/user/mercredi?error";
+        }
+        return "redirect:/user/mercredi?success";
+    }
+
+    @GetMapping("/unsubscribe/{id}")
+    public String unsubscribe(@PathVariable("id") String id, Principal pricipale, Model model){
+
+        try{
+            int idMercredi = Integer.parseInt(id);
+            User user = userService.getUserByUsername(pricipale.getName());
+            Mercredi mercredi = mService.getMercrediById(idMercredi);
+
+            mService.unsubscribe(mercredi, user);
+        }catch (Exception ex){
+            return "redirect:/user/mercredi?error";
+        }
         return "redirect:/user/mercredi?success";
     }
 }

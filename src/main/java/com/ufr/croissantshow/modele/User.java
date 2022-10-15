@@ -3,7 +3,6 @@ package com.ufr.croissantshow.modele;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -60,7 +59,7 @@ public class User {
     @JoinColumn(name="ROLE_ID")
     private Role role;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "presents",cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "presents")
     private List<Mercredi> mercredis;
 
     public void addMercredi(Mercredi mercredi){
@@ -68,26 +67,26 @@ public class User {
             return;
 
         if (this.mercredis == null)
-            this.mercredis = new ArrayList<Mercredi>();
+            this.mercredis = new ArrayList<>();
 
         this.mercredis.add(mercredi);
-        mercredi.addUser(this);
     }
 
     public void removeMercredi(Mercredi mercredi){ //do not use
         if(!mercredis.contains(mercredi))
             return;
-        mercredis.remove(mercredi);
+        this.mercredis.remove(mercredi);
     }
+
     public List<Mercredi> getMercredis(){
         if (this.mercredis == null)
-            this.mercredis = new ArrayList<Mercredi>();
+            this.mercredis = new ArrayList<>();
         return this.mercredis;
     }
 
     public void setMercredis(List<Mercredi> mercredis) {
         if(this.mercredis == null)
-            this.mercredis = new ArrayList<Mercredi>();
+            this.mercredis = new ArrayList<>();
         else{
             for(Mercredi m:this.mercredis){
                 m.removeUser(this);

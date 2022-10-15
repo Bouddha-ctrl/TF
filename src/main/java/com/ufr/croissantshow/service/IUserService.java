@@ -10,8 +10,9 @@ import java.util.List;
 public interface IUserService {
 
     public void addUser(User user) throws DataIntegrityViolationException;
-    public void updateUser(User user) throws DataIntegrityViolationException, UserNotFoundException;
-    public void deleteUserById(int id) throws UserNotFoundException;;
+    public void updateUser(User user) throws DataIntegrityViolationException;
+    public void updateProfil(User user) throws UserNotFoundException;
+    public void deleteUserById(int id) throws UserNotFoundException;
     public User getUserById(int id) throws UserNotFoundException;
 
     public User getUserByUsername(String username) throws UserNotFoundException;

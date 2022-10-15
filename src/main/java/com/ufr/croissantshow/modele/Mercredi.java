@@ -2,7 +2,6 @@ package com.ufr.croissantshow.modele;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -41,13 +40,13 @@ public class Mercredi {
 
     public List<User> getPresents(){
         if (this.presents == null)
-            this.presents = new ArrayList<User>();
+            this.presents = new ArrayList<>();
         return this.presents;
     }
 
     public void setPresents(List<User> users){
         if(this.presents == null)
-            this.presents = new ArrayList<User>();
+            this.presents = new ArrayList<>();
         else{
             for(User u:this.presents){
                 u.removeMercredi(this);
@@ -61,17 +60,23 @@ public class Mercredi {
             return;
 
         if (this.presents == null)
-            this.presents = new ArrayList<User>();
+            this.presents = new ArrayList<>();
+
+        if (this.presents.contains(user))
+            return;
 
         presents.add(user);
+        user.addMercredi(this);
     }
 
     public void removeUser(User user){ //do not use
+        if(!presents.contains(user))
+            return;
         presents.remove(user);
+        user.removeMercredi(this);
     }
 
-    public boolean containUserByUsername(String username){
-        System.out.println(username);
+    public boolean containUserByUsername(String username){ //used in html
         return this.presents
                 .stream()
                 .anyMatch(user -> user.getUsername().equals(username));

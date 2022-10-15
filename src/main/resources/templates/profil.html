@@ -55,6 +55,7 @@
             <div class="form-outline mb-4">
                 <input th:field="*{username}" type="text" id="form3Example4" class="form-control" disabled/>
                 <input th:field="*{username}" type="text" id="form3Exampl" class="form-control" hidden/>
+                <input th:field="*{id}" type="text"  class="form-control" hidden/>
                 <div class="erreur" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username
                     Error</div>
                 <label class="form-label" for="form3Example4">username</label>

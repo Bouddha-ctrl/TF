@@ -3,12 +3,14 @@ package com.ufr.croissantshow.service.implementation;
 import com.ufr.croissantshow.dao.IRoleDao;
 import com.ufr.croissantshow.dao.IUserDao;
 import com.ufr.croissantshow.exception.UserNotFoundException;
+import com.ufr.croissantshow.modele.Mercredi;
 import com.ufr.croissantshow.modele.Role;
 import com.ufr.croissantshow.modele.User;
+import com.ufr.croissantshow.service.IMercrediService;
 import com.ufr.croissantshow.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +25,10 @@ public class UserServiceImp implements IUserService {
     @Autowired
     private IRoleDao roleDao;
 
+    @Autowired
+    @Lazy
+    private IMercrediService mercrediService;
+
     @Override
     public void addUser(User user) throws DataIntegrityViolationException {
         Role role = roleDao.findRoleByRoleName("ROLE_USER");
@@ -32,18 +38,31 @@ public class UserServiceImp implements IUserService {
     }
 
     @Override
-    public void updateUser(User olduser) throws DataIntegrityViolationException, UserNotFoundException {
+    public void updateProfil(User olduser) throws UserNotFoundException {
         User newUser = this.getUserByUsername(olduser.getUsername());
         newUser.setFirstname(olduser.getFirstname());
         newUser.setLastname(olduser.getLastname());
         newUser.setEmail(olduser.getEmail());
         newUser.setPassword(olduser.getPassword());
-        userDao.save(newUser);
+        this.updateUser(newUser);
     }
 
     @Override
+    public void updateUser(User user) throws DataIntegrityViolationException {
+        userDao.save(user);
+    }
+
+
+    private void deleteAllMercredis(User user){
+        user.getMercredis().forEach(m ->
+                mercrediService.setMercrediResponsable(m, null)
+        );
+        userDao.deleteAllMercredis(user.getId());
+    }
+    @Override
     public void deleteUserById(int id) throws UserNotFoundException {
         User user = this.getUserById(id);
+        this.deleteAllMercredis(user);
         userDao.delete(user);
     }
 
@@ -79,7 +98,7 @@ public class UserServiceImp implements IUserService {
     @Override
     public void enableUser(User user) {
         user.setEnabled(true);
-
+        this.addUserToAllMercredi(user);
         userDao.save(user);
     }
 
@@ -95,7 +114,11 @@ public class UserServiceImp implements IUserService {
     }
 
     private void addUserToAllMercredi(User user){
-
-
+        if(user == null)
+            return;
+        
+        List<Mercredi> mercredis = mercrediService.getAllNextMercredis();
+        for(Mercredi m: mercredis)
+            m.addUser(user);
     }
 }

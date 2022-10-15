@@ -86,7 +86,7 @@ public class GeneralController {
             return "profil";
         }
         try{
-            userService.updateUser(user);
+            userService.updateProfil(user);
         }catch(Exception ex){
             return "error/500";
         }
