@@ -26,6 +26,7 @@ class UserDetailsServiceImplTest {
                 .password("password")
                 .lastname("nom")
                 .firstname("prenom")
+                .email("truc@truc.com")
                 .build();
         userS.addUser(user);
 

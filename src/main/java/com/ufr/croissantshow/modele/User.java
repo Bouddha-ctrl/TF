@@ -47,6 +47,7 @@ public class User {
 
     @Column
     @Email(message = "Invalid email")
+    @NotBlank(message = "This field is required")
     private String email; // Adresse email valide (format X@Y.Z)
 
     @Column

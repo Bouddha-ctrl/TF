@@ -27,6 +27,7 @@ class UserServiceImpTest {
                 .password("password")
                 .lastname("nom")
                 .firstname("prenom")
+                .email("truc@truc.com")
                 .build();
         userS.addUser(user);
 
@@ -53,6 +54,7 @@ class UserServiceImpTest {
                 .password("password")
                 .lastname("nom")
                 .firstname("prenom")
+                .email("truc@truc.com")
                 .build();
         userS.addUser(user);
 
@@ -61,6 +63,7 @@ class UserServiceImpTest {
                 .password("password")
                 .lastname("nom")
                 .firstname("prenom")
+                .email("truc@truc.com")
                 .build();
 
         Assertions.assertThrows(DataIntegrityViolationException.class, () -> {
@@ -75,6 +78,7 @@ class UserServiceImpTest {
                 .password("password")
                 .lastname("nom")
                 .firstname("prenom")
+                .email("truc@truc.com")
                 .build();
 
         Assertions.assertThrows(TransactionSystemException.class, () -> {
@@ -90,6 +94,7 @@ class UserServiceImpTest {
                 .password("password")
                 .lastname("nom")
                 .firstname("prenom")
+                .email("truc@truc.com")
                 .build();
 
         Assertions.assertThrows(TransactionSystemException.class, () -> {
@@ -103,6 +108,7 @@ class UserServiceImpTest {
                 .password("password")
                 .lastname("nom")
                 .firstname("prenom")
+                .email("truc@truc.com")
                 .build();
 
         Assertions.assertThrows(TransactionSystemException.class, () -> {
@@ -116,6 +122,7 @@ class UserServiceImpTest {
                 .username("testAddUserWithMissingPassword")
                 .lastname("nom")
                 .firstname("prenom")
+                .email("truc@truc.com")
                 .build();
 
         Assertions.assertThrows(TransactionSystemException.class, () -> {
@@ -129,6 +136,7 @@ class UserServiceImpTest {
                 .username("addNoLastname")
                 .password("password")
                 .firstname("prenom")
+                .email("truc@truc.com")
                 .build();
 
         Assertions.assertThrows(TransactionSystemException.class, () -> {
@@ -141,6 +149,21 @@ class UserServiceImpTest {
         User user = User.builder()
                 .username("testNoFirstname")
                 .password("password")
+                .lastname("nom")
+                .email("truc@truc.com")
+                .build();
+
+        Assertions.assertThrows(TransactionSystemException.class, () -> {
+            userS.addUser(user);
+        });
+    }
+
+    @Test
+    void testAddUserWithMissingEmail() {
+        User user = User.builder()
+                .username("testNoFirstname")
+                .password("password")
+                .firstname("prenom")
                 .lastname("nom")
                 .build();
 
@@ -156,6 +179,7 @@ class UserServiceImpTest {
                 .password("password")
                 .lastname("nom")
                 .firstname("prenom")
+                .email("truc@truc.com")
                 .build();
         userS.addUser(user);
 
@@ -172,6 +196,7 @@ class UserServiceImpTest {
                 .password("password")
                 .lastname("nom")
                 .firstname("prenom")
+                .email("truc@truc.com")
                 .build();
         userS.addUser(user);
 
@@ -189,6 +214,7 @@ class UserServiceImpTest {
                 .password("password")
                 .lastname("nom")
                 .firstname("prenom")
+                .email("truc@truc.com")
                 .build();
         userS.addUser(user);
 
@@ -205,6 +231,7 @@ class UserServiceImpTest {
                 .password("password")
                 .lastname("nom")
                 .firstname("prenom")
+                .email("truc@truc.com")
                 .build();
         userS.addUser(user);
 
@@ -222,6 +249,7 @@ class UserServiceImpTest {
                 .password("password")
                 .lastname("nom")
                 .firstname("prenom")
+                .email("truc@truc.com")
                 .build();
         userS.addUser(user1);
 
@@ -243,6 +271,7 @@ class UserServiceImpTest {
                 .password("password")
                 .lastname("nom")
                 .firstname("prenom")
+                .email("truc@truc.com")
                 .build();
         userS.addUser(user1);
 
@@ -264,6 +293,7 @@ class UserServiceImpTest {
                 .password("password")
                 .lastname("nom")
                 .firstname("prenom")
+                .email("truc@truc.com")
                 .build();
         userS.addUser(user);
 
