@@ -2,12 +2,10 @@ package com.ufr.croissantshow;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.interactions.Actions;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class Common {
 
@@ -63,6 +61,11 @@ public class Common {
 
         driver.findElement(By.id("form3Example5")).sendKeys(s);
         driver.findElement(By.cssSelector(".btn-block")).click();
+
+    }
+
+    public static void profileUpdateSuccessful(){
+
         assertEquals(("L'utilisateur est modifié"),driver.findElement(By.cssSelector("strong")).getText());
     }
 
