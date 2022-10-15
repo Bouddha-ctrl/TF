@@ -22,7 +22,7 @@ public class Interface_de_connexion_des_utilisateurs___administrateur_178 {
     public void lUtilisateurEstRedirigéVersLInterfaceUtilisateur() {
     }
 
-    @And("L{string}a pas été validé par l administrateur")
+    @And("L'utilisateur n a pas été validé par l administrateur")
     public void lUtilisateurNAPasÉtéValidéParLAdministrateur() {
     }
 
@@ -53,4 +53,6 @@ public class Interface_de_connexion_des_utilisateurs___administrateur_178 {
     @Then("L'individu reçoit un message type Identifiant ou mot de passe incorrect.")
     public void lIndividuReçoitUnMessageTypeIdentifiantOuMotDePasseIncorrect() {
     }
+
+
 }

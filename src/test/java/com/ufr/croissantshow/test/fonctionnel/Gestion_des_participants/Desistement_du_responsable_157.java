@@ -14,7 +14,7 @@ public class Desistement_du_responsable_157 {
     public void leResponsableSeDésiste() {
     }
 
-    @Then("l{string}a plus de reponsable")
+    @Then("l'évènement n a plus de reponsable")
     public void lÉvènementNAPlusDeReponsable() {
     }
 }

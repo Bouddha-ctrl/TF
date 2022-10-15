@@ -19,7 +19,7 @@ public class Heure_limite_d_inscription_162 {
     public void leMembreTenteDeSeDésinscrire() {
     }
 
-    @Then("Un message d{string}évènement")
+    @Then("Un message d'erreur est affiché, il est considéré comme participant à l évènement")
     public void unMessageDErreurEstAffichéIlEstConsidéréCommeParticipantÀLÉvènement() {
     }
 
@@ -29,5 +29,9 @@ public class Heure_limite_d_inscription_162 {
 
     @When("Le membre tente de s'inscrire")
     public void leMembreTenteDeSInscrire() {
+    }
+
+    @Then("Un message d'erreur est affiché, il est considéré comme non-participant à l évènement")
+    public void unMessageDErreurEstAffichéIlEstConsidéréCommeNonParticipantÀLÉvènement() {
     }
 }

@@ -19,13 +19,16 @@ public class Modifications_des_informations_de_l_administrateur_107 {
 
     @Then("Le pseudo de l'administrateur est modifié et il est notifié")
     public void lePseudoDeLAdministrateurEstModifiéEtIlEstNotifié() {
+        Common.profileUpdateSuccessful();
     }
 
     @When("Le mot de passe de l'administrateur est modifié et il est notifié")
     public void leMotDePasseDeLAdministrateurEstModifiéEtIlEstNotifié() {
+        Common.profileUpdateSuccessful();
     }
 
     @When("Le pseudo et le mot de passe de l'administrateur est modifié et il est notifié")
     public void lePseudoEtLeMotDePasseDeLAdministrateurEstModifiéEtIlEstNotifié() {
+        Common.profileUpdateSuccessful();
     }
 }

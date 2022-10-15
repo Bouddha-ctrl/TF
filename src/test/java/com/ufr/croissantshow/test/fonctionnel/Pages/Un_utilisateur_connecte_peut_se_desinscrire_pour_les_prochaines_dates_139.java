@@ -42,7 +42,7 @@ public class Un_utilisateur_connecte_peut_se_desinscrire_pour_les_prochaines_dat
     public void lUtilisateurEstAjoutéAuxInscritsDeCetteDate() {
     }
 
-    @Given("l{string}est pas inscrit")
+    @Given("l'utilisateur tente de se proposer responsable du prochain Croissant Show, auquel il n est pas inscrit")
     public void lUtilisateurTenteDeSeProposerResponsableDuProchainCroissantShowAuquelIlNEstPasInscrit() {
     }
 
@@ -50,7 +50,7 @@ public class Un_utilisateur_connecte_peut_se_desinscrire_pour_les_prochaines_dat
     public void lUtilisateurCliqueSurLeBoutonDevenirResponsable() {
     }
 
-    @Then("un message d{string}utilisateur de s'inscrire à cette date")
+    @Then("un message d'erreur demande à l utilisateur de s inscrire à cette date")
     public void unMessageDErreurDemandeÀLUtilisateurDeSInscrireÀCetteDate() {
     }
 
@@ -61,4 +61,5 @@ public class Un_utilisateur_connecte_peut_se_desinscrire_pour_les_prochaines_dat
     @Then("l'utilisateur devient responsable du prochain Croissant Show")
     public void lUtilisateurDevientResponsableDuProchainCroissantShow() {
     }
+
 }

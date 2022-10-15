@@ -39,7 +39,7 @@ public class Un_utilisateur_inscrit_se_connecte_avec_son_compte_124 {
     }
 
 
-    @Given("L{string}est pas connecté")
+    @Given("L'utilisateur est sur la page de connexion du site et n est pas connecté")
     public void lUtilisateurEstSurLaPageDeConnexionDuSiteEtNEstPasConnecté() {
     }
 
@@ -54,11 +54,11 @@ public class Un_utilisateur_inscrit_se_connecte_avec_son_compte_124 {
         driver.findElement(By.xpath("//input[@id='form1Example23']")).sendKeys("useruser");
     }
 
-    @And("L{string}administrateur")
+    @And("L'utilisateur a été accepté par l administrateur")
     public void lUtilisateurAÉtéAcceptéParLAdministrateur() {
     }
 
-    @Then("L{string}interface membre'")
+    @Then("L'utilisateur arrive sur la page interface membre")
     public void lUtilisateurArriveSurLaPageInterfaceMembre() {
     }
 
@@ -73,11 +73,11 @@ public class Un_utilisateur_inscrit_se_connecte_avec_son_compte_124 {
         driver.findElement(By.xpath("//input[@id='form1Example13']")).sendKeys("userpasinscrit");
     }
 
-    @And("L{string}est pas inscrit")
+    @And("L'utilisateur ne s est pas inscrit")
     public void lUtilisateurNeSEstPasInscrit() {
     }
 
-    @Then("L{string}erreur")
+    @Then("L'utilisateur arrive sur la page de connexion avec un message d erreur")
     public void lUtilisateurArriveSurLaPageDeConnexionAvecUnMessageDErreur() {
         assertEquals("Nom d'utilisateur ou mot de passe erroné",
                 driver.findElement(By.cssSelector("body > section > div > div > div.col-md-7.col-lg-5.col-xl-5.offset-xl-1.pt-3 > form > div.alert.alert-danger > div")).getText());

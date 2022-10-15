@@ -50,4 +50,8 @@ public class Connexion_compte_administrateur_81 {
     public static void l_utilisateur_entre_le_mot_de_passe_de_l_administrateur_dans_le_champ_mot_de_passe() {
         driver.findElement(By.xpath("//input[@id='form1Example23']")).sendKeys(ADMIN_PASSWORD);
     }
+
+    @Given("L'utilisateur est sur la page principale du site et n est pas connecté")
+    public void lUtilisateurEstSurLaPagePrincipaleDuSiteEtNEstPasConnecté() {
+    }
 }

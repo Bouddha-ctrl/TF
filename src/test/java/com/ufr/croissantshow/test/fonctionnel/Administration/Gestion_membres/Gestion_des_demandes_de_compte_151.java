@@ -6,7 +6,7 @@ import org.junit.Ignore;
 
 public class Gestion_des_demandes_de_compte_151 {
 
-    @When("L{string}un utilisateur")
+    @When("L'administrateur accepte la demande d un utilisateur")
     public void lAdministrateurAccepteLaDemandeDUnUtilisateur() {
     }
 
@@ -14,7 +14,13 @@ public class Gestion_des_demandes_de_compte_151 {
     public void lUtilisateurEstAjoutéÀLaListeDesUtilisateursEtPeutDésormaisSeConnecter() {
     }
 
-    @Then("L{string}est pas créé")
+    @Then("L'utilisateur n est pas créé")
     public void lUtilisateurNEstPasCréé() {
     }
+
+    @When("L'administrateur refuse la demande d un utilisateur")
+    public void lAdministrateurRefuseLaDemandeDUnUtilisateur() {
+    }
+
+
 }
