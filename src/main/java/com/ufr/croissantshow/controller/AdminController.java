@@ -1,6 +1,8 @@
 package com.ufr.croissantshow.controller;
 
+import com.ufr.croissantshow.modele.Mercredi;
 import com.ufr.croissantshow.modele.User;
+import com.ufr.croissantshow.service.IMercrediService;
 import com.ufr.croissantshow.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -18,6 +21,9 @@ public class AdminController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IMercrediService mService;
 
     @GetMapping("/home")
     public String adminHomePage(){
@@ -66,5 +72,40 @@ public class AdminController {
 
         }
         return "redirect:/admin/user/list";
+    }
+
+    @GetMapping("/mercredi")
+    public String mercrediList(Model model){
+
+        model.addAttribute("mercredis",mService.getAllNextMercredis());
+        return "admin/admin_mercredi";
+    }
+
+    @GetMapping("/mercrediAnnule/{id}")
+    public String cancelMercredi(@PathVariable("id") String idMercredi, Principal pricipale, Model model){
+
+        try{
+            Mercredi mercredi = mService.getMercrediById(Integer.parseInt(idMercredi));
+            mercredi.setMercrediAnnule(true);
+            mService.updateMercredi(mercredi);
+        }catch(Exception ex){
+            return "redirect:/admin/mercredi?error";
+        }
+
+        return "redirect:/admin/mercredi?success";
+    }
+
+    @GetMapping("/mercrediActive/{id}")
+    public String activeMercredi(@PathVariable("id") String idMercredi, Principal pricipale, Model model){
+
+        try{
+            Mercredi mercredi = mService.getMercrediById(Integer.parseInt(idMercredi));
+            mercredi.setMercrediAnnule(false);
+            mService.updateMercredi(mercredi);
+        }catch(Exception ex){
+            return "redirect:/admin/mercredi?error";
+        }
+
+        return "redirect:/admin/mercredi?success";
     }
 }
