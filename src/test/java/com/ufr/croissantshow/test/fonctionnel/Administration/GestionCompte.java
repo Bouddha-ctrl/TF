@@ -28,6 +28,7 @@ public class GestionCompte {
     @Ignore
     @Then("Le pseudo de l'administrateur est modifié et il est notifié")
     public void le_pseudo_de_l_administrateur_est_modifié_et_il_est_notifié() {
+        Common.profileUpdateSuccessful();
     }
 
     @When("L'administrateur change de mot de passe")
@@ -35,14 +36,16 @@ public class GestionCompte {
         Common.goToProfile();
         Common.modifyPassword("adminadmin");
     }
-    @Ignore
+
     @When("Le mot de passe de l'administrateur est modifié et il est notifié")
     public void le_mot_de_passe_de_l_administrateur_est_modifié_et_il_est_notifié() {
+        Common.profileUpdateSuccessful();
 
     }
     @Ignore
     @When("Le pseudo et le mot de passe de l'administrateur est modifié et il est notifié")
     public void le_pseudo_et_le_mot_de_passe_de_l_administrateur_est_modifié_et_il_est_notifié() {
 
+        Common.profileUpdateSuccessful();
     }
 }
