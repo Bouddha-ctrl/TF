@@ -22,7 +22,7 @@ public class Un_nouvel_utilisateur_doit_pouvoir_s_inscrire_comme_nouveau_membre_
     public void lUtilisateurEntreUneAdresseMailValide() {
     }
 
-    @Then("L{string}accueil en etant connecté")
+    @Then("L'utilisateur arrive sur la page d accueil en etant connecté")
     public void lUtilisateurArriveSurLaPageDAccueilEnEtantConnecté() {
     }
 
@@ -41,4 +41,6 @@ public class Un_nouvel_utilisateur_doit_pouvoir_s_inscrire_comme_nouveau_membre_
     @And("L'utilisateur entre une adresse mail invalide")
     public void lUtilisateurEntreUneAdresseMailInvalide() {
     }
+
+
 }

@@ -53,5 +53,6 @@ public class Connexion_compte_administrateur_81 {
 
     @Given("L'utilisateur est sur la page principale du site et n est pas connecté")
     public void lUtilisateurEstSurLaPagePrincipaleDuSiteEtNEstPasConnecté() {
+
     }
 }

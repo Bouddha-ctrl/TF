@@ -94,8 +94,8 @@ public class Un_utilisateur_inscrit_se_connecte_avec_son_compte_124 {
         driver.findElement(By.xpath("//input[@id='form1Example23']")).sendKeys("userpasinscrit");
     }
 
-    @And("L{string}a été accepté par l'administrateur")
-    public void lUtilisateurNAÉtéAcceptéParLAdministrateur() {
+    @And("L'utilisateur n a pas été accepté par ladministrateur")
+    public void lUtilisateurNAPasÉtéAcceptéParLadministrateur() {
     }
 
     @Given("L'utilisateur est connecté sur le site")
