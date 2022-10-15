@@ -6,7 +6,6 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.Before;
 import io.cucumber.java.After;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static com.ufr.croissantshow.Common.*;
@@ -53,22 +52,25 @@ public class testCroissant {
     /*
             81 starts here
      */
+
+    //only used by 81 goes to connexion page despite semantic
     @Given("L'utilisateur est sur la page principale du site et n'est pas connecté")
     public static void l_utilisateur_est_sur_la_page_principale_du_site_et_n_est_pas_connecté() {
         accessPage("");
         accessPage("login");
         assertNotEquals(driver.findElement(By.cssSelector(".btn-link")).getText(), "PROFIL");
         assertEquals("Connexion",driver.findElement(By.cssSelector(".btn-link")).getText());
+
         goToConnexion();
 
     }
     @When("L'utilisateur entre le pseudo {string} dans le champ pseudo")
     public static void l_utilisateur_entre_le_pseudo_dans_le_champ_pseudo(String string) {
-        driver.findElement(By.xpath("//input[@id='form1Example13']")).sendKeys(string);
+        fillUsernameFieldLogin(string);
     }
     @When("L'utilisateur entre le mot de passe {string} dans le champ mot de passe")
     public static void l_utilisateur_entre_le_mot_de_passe_dans_le_champ_mot_de_passe(String string) {
-        driver.findElement(By.xpath("//input[@id='form1Example23']")).sendKeys(string);
+        fillPasswordFieldLogin(string);
     }
     /*
     valide d'abord le login avant de vérifier l'arrivé sur la page d'inscription

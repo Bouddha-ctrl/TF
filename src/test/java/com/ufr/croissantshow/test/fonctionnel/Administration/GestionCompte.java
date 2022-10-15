@@ -1,5 +1,6 @@
 package com.ufr.croissantshow.test.fonctionnel.Administration;
 
+import com.ufr.croissantshow.Common;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -28,10 +29,11 @@ public class GestionCompte {
     @Then("Le pseudo de l'administrateur est modifié et il est notifié")
     public void le_pseudo_de_l_administrateur_est_modifié_et_il_est_notifié() {
     }
-    @Ignore
+
     @When("L'administrateur change de mot de passe")
     public void l_administrateur_change_de_mot_de_passe() {
-
+        Common.goToProfile();
+        Common.modifyPassword("adminadmin");
     }
     @Ignore
     @When("Le mot de passe de l'administrateur est modifié et il est notifié")
