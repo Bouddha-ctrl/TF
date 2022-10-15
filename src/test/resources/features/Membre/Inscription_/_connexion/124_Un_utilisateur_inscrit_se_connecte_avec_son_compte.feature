@@ -21,7 +21,7 @@ Scenario: Connexion au compte membre valide, mais non validé par l'administrate
   Given L'utilisateur est sur la page de connexion du site et n est pas connecté
   When L'utilisateur entre un bon pseudo dans le champ pseudo 
   And L'utilisateur entre un bon mot de passe dans le champ mot de passe
-  And L'utilisateur n a été accepté par l'administrateur
+  And L'utilisateur n a pas été accepté par ladministrateur
   Then L'utilisateur arrive sur la page de connexion avec un message d erreur 
   
     
