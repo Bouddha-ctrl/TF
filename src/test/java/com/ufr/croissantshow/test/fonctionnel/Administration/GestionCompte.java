@@ -6,10 +6,19 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.junit.Ignore;
 
+import com.ufr.croissantshow.testCroissant;
+
 public class GestionCompte {
-    @Ignore
+
+    // used by 107, 151 and 156
     @Given("L'administrateur est connecté")
     public void l_administrateur_est_connecté() {
+
+        testCroissant.l_utilisateur_est_sur_la_page_principale_du_site_et_n_est_pas_connecté();
+        testCroissant.l_utilisateur_entre_le_pseudo_de_l_administrateur_dans_le_champ_pseudo();
+        testCroissant.l_utilisateur_entre_le_mot_de_passe_de_l_administrateur_dans_le_champ_mot_de_passe();
+        testCroissant.l_utilisateur_arrive_sur_la_page_administrateur();
+
     }
     @Ignore
     @When("L'administrateur change de pseudo")
