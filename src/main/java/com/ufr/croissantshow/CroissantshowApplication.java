@@ -70,8 +70,8 @@ public class CroissantshowApplication implements CommandLineRunner {
 				.email("email@email.com")
 				.username("useruser")
 				.password("useruser")
-				.lastname("nom")
-				.firstname("prenom")
+				.lastname("nom1")
+				.firstname("prenom1")
 				.build();
 
 		uDao.save(user2);
@@ -82,8 +82,8 @@ public class CroissantshowApplication implements CommandLineRunner {
 				.email("email@email.com")
 				.username("useruser2")
 				.password("useruser")
-				.lastname("nom")
-				.firstname("prenom")
+				.lastname("nom2")
+				.firstname("prenom2")
 				.build();
 
 		uDao.save(user3);
@@ -93,6 +93,13 @@ public class CroissantshowApplication implements CommandLineRunner {
 									TemporalAdjusters.next( DayOfWeek.WEDNESDAY )
 									)
 								.toString());
+		Date next2 =new SimpleDateFormat("yyyy-MM-dd")
+				.parse(LocalDate.now().with(
+								TemporalAdjusters.next( DayOfWeek.WEDNESDAY )
+						).now().with(
+								TemporalAdjusters.next( DayOfWeek.WEDNESDAY )
+						)
+						.toString());
 		Date prev =new SimpleDateFormat("yyyy-MM-dd")
 				.parse(LocalDate.now().with(
 								TemporalAdjusters.previous( DayOfWeek.WEDNESDAY )
@@ -101,14 +108,18 @@ public class CroissantshowApplication implements CommandLineRunner {
 
 
 		Mercredi mercredi1 = Mercredi.builder()
-				.date(next)
-				.build();
-
-		Mercredi mercredi2 = Mercredi.builder()
 				.date(prev)
 				.build();
 
+		Mercredi mercredi2 = Mercredi.builder()
+				.date(next)
+				.build();
+		Mercredi mercredi3 = Mercredi.builder()
+				.date(next2)
+				.build();
+
 		mService.addMercredi(mercredi1);
+		mService.addMercredi(mercredi3);
 		mService.addMercredi(mercredi2);
 	}
 

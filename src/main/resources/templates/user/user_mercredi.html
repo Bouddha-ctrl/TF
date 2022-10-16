@@ -35,7 +35,14 @@
             <tr th:each="mercredi : ${mercredis}">
                 <td th:utext="${mercredi.id}"></td>
                 <td th:utext="${mercredi.date}"></td>
-                <td th:utext="${mercredi.presents.size}"></td>
+                <td>
+                   <span th:if="${mercredi.presents.size>0}" >
+                        <a th:utext="${mercredi.presents.size}" th:href="${'/user/mercredi/'+mercredi.id}"></a>
+                   </span>
+                    <span th:if="${mercredi.presents.size==0}">
+                        0
+                   </span>
+                </td>
                 <td>
                     <span
                             data-th-if="${mercredi.mercrediAnnule != true}"
@@ -81,7 +88,49 @@
             <tbody>
         </table>
     </div>
-
     <span th:replace="layouts/foot :: foot"></span>
+
+    <!-- Button trigger modal -->
+    <button type="button" hidden id="displayModel" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal modal-dialog-scrollable fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">All Participants</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped table-sm align-middle">
+                        <thead>
+                            <tr>
+                                <th>Last name</th>
+                                <th>First name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="user : ${listParticipant}">
+                                <td th:utext="${user.lastname}"></td>
+                                <td th:utext="${user.firstname}"></td>
+                            </tr>
+                            <tbody>
+                        </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:data="${listParticipant != null}">
+        let existe= document.currentScript.getAttribute('data');
+        if (existe == 'true'){
+            document.getElementById("displayModel").click();
+        }
+
+    </script>
 </body>
 </html>

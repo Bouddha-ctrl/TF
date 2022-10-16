@@ -28,9 +28,16 @@ public class UserController {
         return "user/user_homepage"; // ressource/templates/...
     }
 
-    @GetMapping("/mercredi")
-    public String mercrediList(Model model){
-
+    @GetMapping(value={"/mercredi/{id}","/mercredi"})
+    public String mercrediList(@PathVariable(name="id",required = false) String id, Model model){
+        if(id != null){
+            try{
+                int idMercredi = Integer.parseInt(id);
+                model.addAttribute("listParticipant",mService.getAllParticipantByMercredi(idMercredi));
+            }catch(Exception ex){
+                return "redirect:/user/mercredi?error";
+            }
+        }
         model.addAttribute("mercredis",mService.getAllNextMercredis());
         return "user/user_mercredi";
     }

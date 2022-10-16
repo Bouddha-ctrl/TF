@@ -61,6 +61,12 @@ public class MercrediServiceImp implements IMercrediService {
     }
 
     @Override
+    public List<User> getAllParticipantByMercredi(int idMercredi) throws MercrediNotFoundException {
+        Mercredi mercredi = mDao.findById(idMercredi).orElseThrow(MercrediNotFoundException::new);
+        return mercredi.getPresents();
+    }
+
+    @Override
     public void subscribe(Mercredi mercredi, User user) {
         mercredi.addUser(user);
         this.updateMercredi(mercredi);
