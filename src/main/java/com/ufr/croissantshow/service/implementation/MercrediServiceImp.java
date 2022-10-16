@@ -67,13 +67,21 @@ public class MercrediServiceImp implements IMercrediService {
     }
 
     @Override
-    public void subscribe(Mercredi mercredi, User user) {
+    public void subscribe(Mercredi mercredi, User user) throws Exception{
+
+        if(!this.getAllNextMercredis().contains(mercredi)){
+            throw new Exception();
+        }
         mercredi.addUser(user);
         this.updateMercredi(mercredi);
     }
 
     @Override
-    public void unsubscribe(Mercredi mercredi, User user) {
+    public void unsubscribe(Mercredi mercredi, User user) throws Exception{
+
+        if(!this.getAllNextMercredis().contains(mercredi)){
+            throw new Exception();
+        }
         if(mercredi.getResponsable()!=null && mercredi.getResponsable().equals(user)){
             mercredi.setResponsable(null);
         }
@@ -85,8 +93,10 @@ public class MercrediServiceImp implements IMercrediService {
     @Override
     public void setMercrediResponsable(Mercredi mercredi, User user){
         if(user != null && !mercredi.containUserByUsername(user.getUsername())){
-            this.subscribe(mercredi,user);
-        }
+            try {
+                this.subscribe(mercredi, user);
+            }catch(Exception ex){return;}
+            }
         mercredi.setResponsable(user);
         this.updateMercredi(mercredi);
     }

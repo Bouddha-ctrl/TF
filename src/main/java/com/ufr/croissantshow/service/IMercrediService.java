@@ -20,9 +20,9 @@ public interface IMercrediService {
     public List<Mercredi> getAllNextMercredis();
 
     public List<User> getAllParticipantByMercredi(int idMercredi) throws MercrediNotFoundException;
-    public void subscribe(Mercredi mercredi, User user);
+    public void subscribe(Mercredi mercredi, User user) throws Exception;
 
-    public void unsubscribe(Mercredi mercredi, User user);
+    public void unsubscribe(Mercredi mercredi, User user) throws Exception;
 
     public void setMercrediResponsable(Mercredi mercredi, User user);
 
